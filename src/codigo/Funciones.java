@@ -98,6 +98,7 @@ public class Funciones {
        }
        return band;
     }
+    //Prueba de cambio
     public boolean ValidacionNombreCaracteresYLong(String nombre, int tam){
        boolean val = nombre.length() > 0;
        boolean val2 = nombre.length() < tam;
