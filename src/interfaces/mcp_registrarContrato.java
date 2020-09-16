@@ -119,6 +119,11 @@ boolean bandera;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         codigo.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        codigo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                codigoFocusLost(evt);
+            }
+        });
         codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codigoActionPerformed(evt);
@@ -397,6 +402,11 @@ boolean bandera;
         bandera = true;
     }
     }//GEN-LAST:event_duracion_jtfFocusLost
+
+    private void codigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codigoFocusLost
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_codigoFocusLost
 
     /**
      * @param args the command line arguments
