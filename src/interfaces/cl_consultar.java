@@ -179,7 +179,15 @@ public class cl_consultar extends javax.swing.JFrame {
             new String [] {
                 "RUC", "Empresa", "Nombres Representante", "Apellidos Representante", "Teléfono Conv", "Celular", "Provincia", "Ciudad", "Parroquia", "Estado"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
