@@ -21,7 +21,8 @@ public class FundamentosSoft {
     public static void main(String[] args) {
         Login log = new Login();//instanciar el obj Login
         log.setVisible(true); //hacer visible la ventana
-         boolean band= true;      
+         boolean band= true;   
+         //Cambio para validaciones
        
     }
     
