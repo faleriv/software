@@ -5,13 +5,19 @@
  */
 package interfaces.acm_admContMusic;
 
+import codigo.Funciones;
 import conexion.Procedimientos;
 import interfaces.menPrinci;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -22,10 +28,12 @@ public class acm_registrarCancion extends javax.swing.JFrame {
     /**
      * Creates new form acm_registrarCancion
      */
+
+    
     public acm_registrarCancion() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
-        setTitle("SIGEB | Registrar Canción"); //Poner el título
+        setTitle("SIGEB | Registro de Canción"); //Poner el título
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null); 
     }
@@ -63,8 +71,36 @@ public class acm_registrarCancion extends javax.swing.JFrame {
         genero_jcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Salsa", "Rock", "Merengue", "Pop" }));
 
         cancion_jtf.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        cancion_jtf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cancion_jtfFocusLost(evt);
+            }
+        });
+        cancion_jtf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancion_jtfActionPerformed(evt);
+            }
+        });
+        cancion_jtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cancion_jtfKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cancion_jtfKeyTyped(evt);
+            }
+        });
 
         artista_jtf.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        artista_jtf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                artista_jtfFocusLost(evt);
+            }
+        });
+        artista_jtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                artista_jtfKeyReleased(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel3.setText("Nombre canción:");
@@ -73,6 +109,11 @@ public class acm_registrarCancion extends javax.swing.JFrame {
         jLabel4.setText("Nombre artista:");
 
         año_jtf.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        año_jtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                año_jtfKeyReleased(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel5.setText("Año Lanzamiento:");
@@ -244,6 +285,58 @@ public class acm_registrarCancion extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
+    private void cancion_jtfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancion_jtfActionPerformed
+        // TODO add your handling code here:
+    
+    }//GEN-LAST:event_cancion_jtfActionPerformed
+
+    private void cancion_jtfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cancion_jtfKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancion_jtfKeyTyped
+    private void cancion_jtfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cancion_jtfFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancion_jtfFocusLost
+
+    
+    private void artista_jtfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_artista_jtfFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_artista_jtfFocusLost
+
+    private void cancion_jtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cancion_jtfKeyReleased
+        // TODO add your handling code here:
+         Pattern pat = Pattern.compile("[A-Za-zñÑáéíóú0-9\\s]{1,30}");
+        Matcher mat = pat.matcher(cancion_jtf.getText());
+        if(evt.getKeyCode() ==KeyEvent.VK_ENTER){
+        if (!mat.matches()) {
+            JOptionPane.showMessageDialog(null, "El nombre de la canción es incorrecto");
+        }else{
+            artista_jtf.requestFocus();
+        }  
+        }
+    }//GEN-LAST:event_cancion_jtfKeyReleased
+
+    private void artista_jtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_artista_jtfKeyReleased
+        // TODO add your handling code here:
+        Pattern pat1 = Pattern.compile("[A-Za-zñÑáéíóú\\s]{1,50}");
+        Matcher mat1 = pat1.matcher(artista_jtf.getText());
+        if(evt.getKeyCode() ==KeyEvent.VK_ENTER){
+        if (!mat1.matches()) {
+            JOptionPane.showMessageDialog(null, "El nombre del artista ingresado es incorrecto");
+        } else{
+            año_jtf.requestFocus();}  
+        }
+    }//GEN-LAST:event_artista_jtfKeyReleased
+
+    private void año_jtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_año_jtfKeyReleased
+        // TODO add your handling code here:
+         Pattern pat1 = Pattern.compile("(19[0-9][0-9]|201[4-9]|20[0-1][0-9]|2020)");
+        Matcher mat1 = pat1.matcher(año_jtf.getText());
+        if(evt.getKeyCode() ==KeyEvent.VK_ENTER){
+        if (!mat1.matches()) {
+            JOptionPane.showMessageDialog(null, "La fecha ingresada es incorrecto");
+        } }
+    }//GEN-LAST:event_año_jtfKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -295,4 +388,6 @@ public class acm_registrarCancion extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     // End of variables declaration//GEN-END:variables
+
+       
 }
