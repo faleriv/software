@@ -147,6 +147,8 @@ public class in_registrar extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel4.setText("Estado:");
 
+        jCB_estado.setToolTipText("");
+        jCB_estado.setRequestFocusEnabled(false);
         jCB_estado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCB_estadoActionPerformed(evt);
