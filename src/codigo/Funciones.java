@@ -151,7 +151,7 @@ public class Funciones {
        boolean band= true;
        Pattern pat = Pattern.compile("[0-9]{7,10}");
        Matcher mat = pat.matcher(numero);
-      
+      //hola
        if(!mat.matches())
        {
            band = false;
