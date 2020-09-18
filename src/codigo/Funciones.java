@@ -1,36 +1,38 @@
 package codigo;
 
 import java.awt.List;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
  * @author valer
  */
 public class Funciones {
+
     ArrayList<String> provincias;
-    
-    public Funciones()
-    {
+
+    public Funciones() {
         this.provincias = new ArrayList<String>();
     }
-    
-    public String[] estado()
-    {
+
+    public String[] estado() {
         String estado[] = new String[5];
-        estado[0]="arrendado";
-        estado[1]="dañado";
-        estado[2]="disponible";
-        estado[3]="mantenimiento";
-        estado[4]="vendido";
+        estado[0] = "arrendado";
+        estado[1] = "dañado";
+        estado[2] = "disponible";
+        estado[3] = "mantenimiento";
+        estado[4] = "vendido";
         return estado;
     }
-    
-    public ArrayList nombreProvincias ()
-    {                
+
+    public ArrayList nombreProvincias() {
         provincias.add("Azuay");
         provincias.add("Bolívar");
         provincias.add("Cañar");
@@ -57,133 +59,127 @@ public class Funciones {
         provincias.add("Zamora Chinchipe");
         return provincias;
     }
-    public boolean ValidacionNombreNumero(String nombre, int condicion){
+
+    public boolean ValidacionNombreNumero(String nombre, int condicion) {
         int maximo = 0;
-        if(condicion==0){
-            maximo=50;
-        }else if(condicion ==1){
-            maximo=30;
+        if (condicion == 0) {
+            maximo = 50;
+        } else if (condicion == 1) {
+            maximo = 30;
         }
         boolean resultado = true;
         int digitos = nombre.length();
-        if(digitos ==0 || digitos >maximo)
-        {
-            resultado= false;
+        if (digitos == 0 || digitos > maximo) {
+            resultado = false;
         }
         return resultado;
     }
-    public boolean ValidacionNombreCaracteres(String nombre){
+
+    public boolean ValidacionNombreCaracteres(String nombre) {
         boolean resultado = true;
         Pattern pat = Pattern.compile("^([A-Z]{1}[a-záéíóú]{1,24}[\\s]{1}[A-Z]{1}[a-z]{1,24}|[A-Z]{1}[a-záéíóú]{1,24}[\\s]{1}[A-Z]{1}[a-z]{1,24}[\\s]"
-        +"{1}[A-Z]{1}[a-z]{1,24}[\\s]{1}[A-Z]{1}[a-z]{1,24})");
+                + "{1}[A-Z]{1}[a-z]{1,24}[\\s]{1}[A-Z]{1}[a-z]{1,24})");
         Matcher mat = pat.matcher(nombre);
-        if (!mat.matches())
-        {
+        if (!mat.matches()) {
             resultado = false;
         }
         return resultado;
     }
-    public boolean nombreYLog(String name, int tam)
-    {
-       boolean band= true;
-       boolean val = name.length() > 0;
-       boolean val2 = name.length() < tam;
-       
-       Pattern pat = Pattern.compile("[A-Za-záéíóú\\s]{1,50}");
-       Matcher mat = pat.matcher(name);
-      
-       if(!mat.matches() || !val || !val2)
-       {
-           band = false;
-       }
-       return band;
+
+    public boolean nombreYLog(String name, int tam) {
+        boolean band = true;
+        boolean val = name.length() > 0;
+        boolean val2 = name.length() < tam;
+
+        Pattern pat = Pattern.compile("[A-Za-záéíóú\\s]{1,50}");
+        Matcher mat = pat.matcher(name);
+
+        if (!mat.matches() || !val || !val2) {
+            band = false;
+        }
+        return band;
     }
+
     //Prueba de cambio
-    public boolean ValidacionNombreCaracteresYLong(String nombre, int tam){
-       boolean val = nombre.length() > 0;
-       boolean val2 = nombre.length() < tam;
-       boolean bandera =true;
-        if (!nombre.isEmpty())
-        {    
-            if (!ValidacionNombreCaracteres(nombre) || !val || !val2)
-            {
-               bandera = false;
+    public boolean ValidacionNombreCaracteresYLong(String nombre, int tam) {
+        boolean val = nombre.length() > 0;
+        boolean val2 = nombre.length() < tam;
+        boolean bandera = true;
+        if (!nombre.isEmpty()) {
+            if (!ValidacionNombreCaracteres(nombre) || !val || !val2) {
+                bandera = false;
             }
-        } 
+        }
         return bandera;
     }
-    
-    public boolean ValidacionCodigoContrato(String contrato){
+
+    public boolean ValidacionCodigoContrato(String contrato) {
         boolean resultado = true;
-        if(contrato.length()>5){
+        if (contrato.length() > 5) {
             resultado = false;
         }
         return resultado;
     }
-    
-    public boolean validarCelular(String celular)
-    {
-       boolean band= true;
-       Pattern pat = Pattern.compile("^09[0-9]{8}");
-       Matcher mat = pat.matcher(celular);
-      
-       if(!mat.matches())
-       {
-           band = false;
-       }
-       return band;
-    }   
-    
-    public boolean validarNombreEmpresa(String nombre)
-    {
-        boolean band= true;
-       Pattern pat = Pattern.compile("[A-Za-záéíóú0-9\\s]{1,50}");
-       Matcher mat = pat.matcher(nombre);
-      
-       if(!mat.matches())
-       {
-           band = false;
-       }
-       return band;
+
+    public boolean validarCelular(String celular) {
+        boolean band = true;
+        Pattern pat = Pattern.compile("^09[0-9]{8}");
+        Matcher mat = pat.matcher(celular);
+
+        if (!mat.matches()) {
+            band = false;
+        }
+        return band;
     }
-    public boolean validaFonoConv(String numero)
-    {
-       boolean band= true;
-       Pattern pat = Pattern.compile("[0-9]{7,10}");
-       Matcher mat = pat.matcher(numero);
-      //hola
-       if(!mat.matches())
-       {
-           band = false;
-       }
-       return band;
-    
+
+    public boolean validarNombreEmpresa(String nombre) {
+        boolean band = true;
+        Pattern pat = Pattern.compile("[A-Za-záéíóú0-9\\s]{1,50}");
+        Matcher mat = pat.matcher(nombre);
+
+        if (!mat.matches()) {
+            band = false;
+        }
+        return band;
     }
-    public boolean ValidacionRUC(String ruc){
-       Pattern pat = Pattern.compile("^[0123456789]{10}00(1|2|3){1}");
-       Matcher mat = pat.matcher(ruc);
-       boolean rucCorrecto=true;
-       if(ruc.length()==13){
-       if(mat.matches()){
-           char arreglo[]=new char[ruc.length()-3];
-           String cadena="";
-           for(int i=0;i<(ruc.length()-3);i++)
-            {
-                arreglo[i]=ruc.charAt(i);
-                cadena+=arreglo[i];
-               
+
+    public boolean validaFonoConv(String numero) {
+        boolean band = true;
+        Pattern pat = Pattern.compile("[0-9]{7,10}");
+        Matcher mat = pat.matcher(numero);
+
+        if (!mat.matches()) {
+            band = false;
+        }
+        return band;
+
+    }
+
+    public boolean ValidacionRUC(String ruc) {
+        Pattern pat = Pattern.compile("^[0123456789]{10}00(1|2|3){1}");
+        Matcher mat = pat.matcher(ruc);
+        boolean rucCorrecto = true;
+        if (ruc.length() == 13) {
+            if (mat.matches()) {
+                char arreglo[] = new char[ruc.length() - 3];
+                String cadena = "";
+                for (int i = 0; i < (ruc.length() - 3); i++) {
+                    arreglo[i] = ruc.charAt(i);
+                    cadena += arreglo[i];
+
+                }
+                if (!this.validadorDeCedula(cadena)) {
+                    rucCorrecto = false;
+                }
+            } else {
+                rucCorrecto = false;
             }
-            if(!this.validadorDeCedula(cadena)){
-                rucCorrecto=false;
-            }
-        }else{
-           rucCorrecto=false;
-       }
-      }else{
-           rucCorrecto = false;
-       }
-       return rucCorrecto;
-    }   
+        } else {
+            rucCorrecto = false;
+        }
+        return rucCorrecto;
+    }
+
     public boolean validadorDeCedula(String cedula) {
         boolean cedulaCorrecta = false;
         try {
@@ -191,24 +187,23 @@ public class Funciones {
             {
                 int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
                 if (tercerDigito < 6) {
-                // Coeficientes de validación cédula
-                // El decimo digito se lo considera dígito verificador
-                int[] coefValCedula = { 2, 1, 2, 1, 2, 1, 2, 1, 2 };
-                int verificador = Integer.parseInt(cedula.substring(9,10));
-                int suma = 0;
-                int digito = 0;
-                for (int i = 0; i < (cedula.length() - 1); i++) {
-                    digito = Integer.parseInt(cedula.substring(i, i + 1))* coefValCedula[i];
-                    suma += ((digito % 10) + (digito / 10));
-                }
-                if ((suma % 10 == 0) && (suma % 10 == verificador)) {
-                    cedulaCorrecta = true;
-                }
-                else if ((10 - (suma % 10)) == verificador) {
-                    cedulaCorrecta = true;
-                } else {
-                    cedulaCorrecta = false;
-                }
+                    // Coeficientes de validación cédula
+                    // El decimo digito se lo considera dígito verificador
+                    int[] coefValCedula = {2, 1, 2, 1, 2, 1, 2, 1, 2};
+                    int verificador = Integer.parseInt(cedula.substring(9, 10));
+                    int suma = 0;
+                    int digito = 0;
+                    for (int i = 0; i < (cedula.length() - 1); i++) {
+                        digito = Integer.parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
+                        suma += ((digito % 10) + (digito / 10));
+                    }
+                    if ((suma % 10 == 0) && (suma % 10 == verificador)) {
+                        cedulaCorrecta = true;
+                    } else if ((10 - (suma % 10)) == verificador) {
+                        cedulaCorrecta = true;
+                    } else {
+                        cedulaCorrecta = false;
+                    }
                 } else {
                     cedulaCorrecta = false;
                 }
@@ -226,60 +221,100 @@ public class Funciones {
         }
         return cedulaCorrecta;
     }
-    public boolean validacionFecha(String date){
-        boolean resultado=true;
+
+    public boolean validacionFecha(String date) {
+        boolean resultado = true;
         Pattern pat = Pattern.compile("^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$");
         Matcher mat = pat.matcher(date);
-        if(!mat.matches()){
-          resultado = false; 
-        }   
-        return resultado;
-    }
-    public boolean validacionCostoMensual(String valor){
-        boolean resultado=true;
-        Pattern pat = Pattern.compile("^[123456789]{1}[0123456789]{0,}[.,]{1}[0123456789]{2}");
-        Matcher mat = pat.matcher(valor);
-        if (!mat.matches()){
+        if (!mat.matches()) {
             resultado = false;
         }
         return resultado;
     }
-    public boolean validacionDuracionContrato(String meses){
-    boolean resultado = true;
-    Pattern pat = Pattern.compile("^([1-9]{1})$|^(1[0-2]{1})$");
-    Matcher mat = pat.matcher(meses);
-    if (!mat.matches()){
-        resultado=false;
+
+    public boolean validacionCostoMensual(String valor) {
+        boolean resultado = true;
+        Pattern pat = Pattern.compile("^[123456789]{1}[0123456789]{0,}[.,]{1}[0123456789]{2}");
+        Matcher mat = pat.matcher(valor);
+        if (!mat.matches()) {
+            resultado = false;
+        }
+        return resultado;
     }
-        return resultado; 
+
+    public boolean validacionDuracionContrato(String meses) {
+        boolean resultado = true;
+        Pattern pat = Pattern.compile("^([1-9]{1})$|^(1[0-2]{1})$");
+        Matcher mat = pat.matcher(meses);
+        if (!mat.matches()) {
+            resultado = false;
+        }
+        return resultado;
     }
-    public boolean validacionDigitosCodigoEquipo(String equipo){
-        if(equipo.length()==13 || equipo.length()==15)
-        {return true;}
-        else
-        {return false;}
+
+    public boolean validacionDigitosCodigoEquipo(String equipo) {
+        if (equipo.length() == 13 || equipo.length() == 15) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    public boolean validacionCodigoEquipo(String equipo){
+
+    public boolean validacionCodigoEquipo(String equipo) {
         Pattern pat = Pattern.compile("^\\d{13}|\\d{15}");
         Matcher mat = pat.matcher(equipo);
-        if(mat.matches()){
+        if (mat.matches()) {
             return true;
-        }else{
+        } else {
             return false;
-           
+
         }
-    
+
     }
-    public boolean validacionNombreEquipo(String nombre_equipo){
+
+    public boolean validacionNombreEquipo(String nombre_equipo) {
         Pattern pat = Pattern.compile("^[A-Z]{2}\\d{1}");
         Matcher mat = pat.matcher(nombre_equipo);
-        if(mat.matches()){
+        if (mat.matches()) {
             return true;
-        }else{
+        } else {
             return false;
-           
+
         }
-        
+
+    }
+
+    public void imprimirTabla(JTable jTable, String header, String footer, boolean showPrintDialog) {
+        boolean fitWidth = true;
+        boolean interactive = true;
+        // We define the print mode (Definimos el modo de impresión)
+        JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+        try {
+            // Print the table (Imprimo la tabla)             
+            boolean complete = jTable.print(mode,
+                    new MessageFormat(header),
+                    new MessageFormat(footer),
+                    showPrintDialog,
+                    null,
+                    interactive);
+            if (complete) {
+                // Mostramos el mensaje de impresión existosa
+                JOptionPane.showMessageDialog(jTable,
+                        "Print complete (Impresión completa)",
+                        "Print result (Resultado de la impresión)",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                // Mostramos un mensaje indicando que la impresión fue cancelada                 
+                JOptionPane.showMessageDialog(jTable,
+                        "Print canceled (Impresión cancelada)",
+                        "Print result (Resultado de la impresión)",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (PrinterException pe) {
+            JOptionPane.showMessageDialog(jTable,
+                    "Print fail (Fallo de impresión): " + pe.getMessage(),
+                    "Print result (Resultado de la impresión)",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
-
