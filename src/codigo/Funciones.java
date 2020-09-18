@@ -270,5 +270,16 @@ public class Funciones {
         }
     
     }
+    public boolean validacionNombreEquipo(String nombre_equipo){
+        Pattern pat = Pattern.compile("^[A-Z]{2}\\d{1}");
+        Matcher mat = pat.matcher(nombre_equipo);
+        if(mat.matches()){
+            return true;
+        }else{
+            return false;
+           
+        }
+        
+    }
 }
 
