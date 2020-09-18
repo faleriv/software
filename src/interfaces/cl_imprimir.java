@@ -265,7 +265,7 @@ public class cl_imprimir extends javax.swing.JFrame {
         mp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
-
+//holas
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
 
         Funciones f = new Funciones();
