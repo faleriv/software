@@ -7,6 +7,7 @@ package interfaces.acm_admContMusic;
 
 import codigo.Funciones;
 import conexion.Procedimientos;
+import interfaces.in_registrar;
 import interfaces.menPrinci;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
@@ -69,6 +70,11 @@ public class acm_registrarCancion extends javax.swing.JFrame {
 
         genero_jcb.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         genero_jcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Salsa", "Rock", "Merengue", "Pop" }));
+        genero_jcb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genero_jcbActionPerformed(evt);
+            }
+        });
 
         cancion_jtf.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         cancion_jtf.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -258,24 +264,30 @@ public class acm_registrarCancion extends javax.swing.JFrame {
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
         //registrar
-        String arr[] = new String[4];
-        arr[0] = cancion_jtf.getText();
-        arr[1] = artista_jtf.getText();
-        arr[2] = año_jtf.getText();
-        arr[3] = genero_jcb.getSelectedItem().toString();
         try {
-            Procedimientos.registro(arr, "RegistroCancion");
-            JOptionPane.showMessageDialog(null, "Canción registrada de manera exitosa");
+            // TODO add your handling code here:
+            String arr[] = new String[4];
+            Procedimientos pro1 = new Procedimientos();
+            arr[0] = cancion_jtf.getText();
+            arr[1] = artista_jtf.getText();
+            arr[2] = año_jtf.getText();
+            arr[3] = genero_jcb.getSelectedItem().toString();
+            if(!cancion_jtf.getText().isEmpty()&& !artista_jtf.getText().isEmpty()&& !año_jtf.getText().isEmpty()){
+            if(!pro1.consultarSiExiste("nombre_cancion", "Cancion",arr[0]))
+            {
+                Procedimientos.registro(arr,"RegistroCancion");
+                JOptionPane.showMessageDialog(null,"Canción registrada exitosamente");
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Ya existe una canción registrada con el nombre ingresado");
+        }else{
+                JOptionPane.showMessageDialog(null, "Existen campos vacíos");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(acm_registrarCancion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        //menu principal
-        menPrinci mp = new menPrinci();
-        mp.setVisible(true);
-        this.setVisible(false);
+                
+                
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
@@ -336,6 +348,10 @@ public class acm_registrarCancion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La fecha ingresada es incorrecto");
         } }
     }//GEN-LAST:event_año_jtfKeyReleased
+
+    private void genero_jcbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genero_jcbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_genero_jcbActionPerformed
 
     /**
      * @param args the command line arguments
