@@ -9,6 +9,8 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
         
 
 public class Procedimientos {
@@ -58,6 +60,24 @@ public class Procedimientos {
         return cont;
             
     }    
+    
+    public float consultarPorCod (int cod, String procedimiento)
+    {
+        float valor = -1;
+        try {
+            String cadena = "{call "+procedimiento+"("+cod+")}";
+            CallableStatement entrada = Conexion.getConexion().prepareCall(cadena);
+            ResultSet rs = entrada.executeQuery();
+            while (rs.next())
+                valor = rs.getFloat(1);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Procedimientos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
+    }
+    
     
     public static String generaIncog(int num)
     {
