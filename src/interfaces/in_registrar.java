@@ -391,6 +391,18 @@ public class in_registrar extends javax.swing.JFrame {
                 }
             }
         }
+        else if (actual.equalsIgnoreCase("mantenimiento"))
+        {
+            String cdg=in_jTF_cod.getText();
+                String st=jCB_estado.getSelectedItem().toString();
+                try {
+                    Procedimientos pro = new Procedimientos();
+                    pro.actualizarEquipo(cdg, st, null);
+                    JOptionPane.showMessageDialog(null,"Equipo actualizado exitosamente");
+                } catch (SQLException ex) {
+                    Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
         if (band != 1)
         {
             menPrinci mpr= new menPrinci();
