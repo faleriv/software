@@ -43,6 +43,10 @@ public class cl_consultar extends javax.swing.JFrame {
         
        
     }
+
+    cl_consultar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     public void cargarTabla(String query) throws SQLException
     {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
