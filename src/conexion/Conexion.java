@@ -19,9 +19,10 @@ public class Conexion {
     
     public static Connection getConexion()
     {
-        String url ="jdbc:sqlserver://DESKTOP-KL50MP5:1433;databaseName=sf_si";//Diego
+        //String url ="jdbc:sqlserver://DESKTOP-KL50MP5:1433;databaseName=sf_si";//Diego
          //String url ="jdbc:sqlserver://DESKTOP-MR4QM66:1433;databaseName=sf_si";//Vale
          //String url ="jdbc:sqlserver://DESKTOP-4S9GK79:1433;databaseName=sf_si";//jose
+        String url ="jdbc:sqlserver://DESKTOP-AHHIOUO:1433;databaseName=sf_si";
         try
         {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
