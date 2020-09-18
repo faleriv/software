@@ -20,9 +20,9 @@ public class Conexion {
     public static Connection getConexion()
     {
         //String url ="jdbc:sqlserver://DESKTOP-KL50MP5:1433;databaseName=sf_si";//Diego
-         String url ="jdbc:sqlserver://DESKTOP-MR4QM66:1433;databaseName=sf_si";//Vale
+         //String url ="jdbc:sqlserver://DESKTOP-MR4QM66:1433;databaseName=sf_si";//Vale
          //String url ="jdbc:sqlserver://DESKTOP-4S9GK79:1433;databaseName=sf_si";//jose
-        //String url ="jdbc:sqlserver://DESKTOP-AHHIOUO:1433;databaseName=sf_si";
+        String url ="jdbc:sqlserver://DESKTOP-AHHIOUO:1433;databaseName=sf_si";//Kari
         try
         {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -36,6 +36,7 @@ public class Conexion {
             //contacto = DriverManager.getConnection(url,"sa","Diego2420347");//Diego
             contacto = DriverManager.getConnection(url,"sa","fielEsJesus");//Vale
             //contacto = DriverManager.getConnection(url,"sa","12345");//Jose
+            contacto = DriverManager.getConnection(url,"sa","123456K");//Kari
         }
        catch (SQLException e)
         {
