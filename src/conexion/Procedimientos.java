@@ -122,7 +122,7 @@ public class Procedimientos {
       }
       public static void anularContrato(String cod, String ruc) throws  SQLException
       {
-        String cadena = "{call AnularContrato (?)}";        
+        String cadena = "{call AnularContrato (?,?)}";        
         CallableStatement entrada = Conexion.getConexion().prepareCall(cadena);
         entrada.setString(1, ruc);
         entrada.setString(2, cod);
