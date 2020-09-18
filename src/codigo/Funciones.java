@@ -253,4 +253,22 @@ public class Funciones {
     }
         return resultado; 
     }
+    public boolean validacionDigitosCodigoEquipo(String equipo){
+        if(equipo.length()==13 || equipo.length()==15)
+        {return true;}
+        else
+        {return false;}
+    }
+    public boolean validacionCodigoEquipo(String equipo){
+        Pattern pat = Pattern.compile("^\\d{13}|\\d{15}");
+        Matcher mat = pat.matcher(equipo);
+        if(mat.matches()){
+            return true;
+        }else{
+            return false;
+           
+        }
+    
+    }
 }
+
