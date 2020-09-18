@@ -14,6 +14,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,9 +44,28 @@ public class cl_consultar extends javax.swing.JFrame {
         
        
     }
+
+    public cl_consultar(JTable tablaclientes) {
+        this.tablaclientes = tablaclientes;
+    }
+
+    public cl_consultar() {
+    }
+
+    public JTable getTablaclientes() {
+        return tablaclientes;
+    }
+
+    public void setTablaclientes(JTable tablaclientes) {
+        this.tablaclientes = tablaclientes;
+    }
+
+ 
+
+ 
     public void cargarTabla(String query) throws SQLException
     {
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tablaclientes.getModel();
         modelo.setRowCount(0);
         res = conexion.Conexion.consulta(query);
         try
@@ -64,7 +84,7 @@ public class cl_consultar extends javax.swing.JFrame {
                 v.add(res.getString(9));
                 v.add(res.getString(10));
                 modelo.addRow(v);
-                jTable1.setModel(modelo);
+                tablaclientes.setModel(modelo);
                 
             }
         }
@@ -136,7 +156,7 @@ public class cl_consultar extends javax.swing.JFrame {
         cl_jTF_buscar = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaclientes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton_seleccionar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -169,7 +189,7 @@ public class cl_consultar extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaclientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -188,7 +208,7 @@ public class cl_consultar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaclientes);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel1.setText("Seleccione el campo de búsqueda:");
@@ -251,30 +271,31 @@ public class cl_consultar extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cambia_estado_boton)
-                        .addGap(18, 18, 18)
-                        .addComponent(cl_jTB_crearContrato)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_seleccionar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(cl_jCB_ruc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cl_jTF_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cl_jL_cliente)
                             .addComponent(cl_jL_cliente1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(cambia_estado_boton)
+                        .addGap(115, 115, 115)
+                        .addComponent(cl_jTB_crearContrato)
+                        .addGap(107, 107, 107)
+                        .addComponent(jButton_seleccionar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cl_jTF_buscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addComponent(jScrollPane1)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,7 +329,7 @@ public class cl_consultar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,15 +396,15 @@ public class cl_consultar extends javax.swing.JFrame {
         // TODO add your handling code here:
         Procedimientos pr = new Procedimientos();
         
-        int fila = jTable1.getSelectedRow();
+        int fila = tablaclientes.getSelectedRow();
         //consulta si el cliente tiene equipos
         
         if (fila != -1)
         {
-            String ruc=jTable1.getModel().getValueAt(fila, 0).toString();
+            String ruc=tablaclientes.getModel().getValueAt(fila, 0).toString();
             if (pr.consultarSiExiste("ruc","equipo",ruc))
             {
-                String valor=jTable1.getModel().getValueAt(fila, 0).toString();
+                String valor=tablaclientes.getModel().getValueAt(fila, 0).toString();
                 this.mrc.mcp_jTF_ruc.setText(valor);
                 this.mrc.setVisible(true);
                 this.setVisible(false);
@@ -424,8 +445,8 @@ public class cl_consultar extends javax.swing.JFrame {
 
     private void cambia_estado_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambia_estado_botonActionPerformed
         // TODO add your handling code here:
-        String ruc = jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0).toString();
-        if(jTable1.getSelectedRow()!= -1)
+        String ruc = tablaclientes.getModel().getValueAt(tablaclientes.getSelectedRow(),0).toString();
+        if(tablaclientes.getSelectedRow()!= -1)
         {
             try {
                 Procedimientos pr = new Procedimientos();
@@ -528,7 +549,7 @@ public class cl_consultar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
+    public javax.swing.JTable tablaclientes;
     // End of variables declaration//GEN-END:variables
 }
