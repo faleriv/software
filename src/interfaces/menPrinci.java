@@ -84,7 +84,6 @@ public class menPrinci extends javax.swing.JFrame {
         jMenuItem31 = new javax.swing.JMenuItem();
         jMenuItem35 = new javax.swing.JMenuItem();
         jMenuItem34 = new javax.swing.JMenuItem();
-        jMenu16 = new javax.swing.JMenu();
         jMenu12 = new javax.swing.JMenu();
         jMenuItem36 = new javax.swing.JMenuItem();
         jMenuItem37 = new javax.swing.JMenuItem();
@@ -413,9 +412,6 @@ public class menPrinci extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem34);
-
-        jMenu16.setText("jMenu16");
-        jMenu4.add(jMenu16);
 
         jMenuBar2.add(jMenu4);
 
@@ -904,7 +900,6 @@ public class menPrinci extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu15;
-    private javax.swing.JMenu jMenu16;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;

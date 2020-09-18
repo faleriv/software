@@ -350,6 +350,7 @@ public class cl_consultar extends javax.swing.JFrame {
         {
             case 0:
                 campo = "select * from cliente where ruc= '"+cl_jTF_buscar.getText()+"'";
+                
                 break;
             case 1:
                 campo = "select * from cliente where nombre_representate= '"+cl_jTF_buscar.getText()+"'";
@@ -401,18 +402,23 @@ public class cl_consultar extends javax.swing.JFrame {
         
         if (fila != -1)
         {
-            String ruc=tablaclientes.getModel().getValueAt(fila, 0).toString();
-            if (pr.consultarSiExiste("ruc","equipo",ruc))
+            if(tablaclientes.getModel().getValueAt(fila, 0) !=null)
             {
-                String valor=tablaclientes.getModel().getValueAt(fila, 0).toString();
-                this.mrc.mcp_jTF_ruc.setText(valor);
-                this.mrc.setVisible(true);
-                this.setVisible(false);
+                String ruc=tablaclientes.getModel().getValueAt(fila, 0).toString();
+                if (pr.consultarSiExiste("ruc","equipo",ruc))
+                {
+                    String valor=tablaclientes.getModel().getValueAt(fila, 0).toString();
+                    this.mrc.mcp_jTF_ruc.setText(valor);
+                    this.mrc.setVisible(true);
+                    this.setVisible(false);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "El cliente seleccionado no tiene equipos vendidos o arrendados. No se puede realizar un contrato con el mismo");
+                }
             }
             else
-            {
-                JOptionPane.showMessageDialog(null, "El cliente seleccionado no tiene equipos vendidos o arrendados. No se puede realizar un contrato con el mismo");
-            }
+                JOptionPane.showMessageDialog(null, "Seleccionó una fila vacía");
         }
         else
         {

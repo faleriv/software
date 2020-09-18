@@ -7,6 +7,7 @@ package interfaces;
 
 import codigo.Funciones;
 import conexion.Procedimientos;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -27,23 +28,22 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
      * Creates new form mcp_consultarContrato
      */
     Funciones fu = new Funciones();
+
     public mcp_consultarContrato(int valor) {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null);
-        inicializar (valor);
+        inicializar(valor);
         vald = false;
     }
-    public void cargarArticulo(String consulta)
-    {
-        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+
+    public void cargarArticulo(String consulta) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
         res = conexion.Conexion.consulta(consulta);
-        try
-        {
-            while(res.next())
-            {
+        try {
+            while (res.next()) {
                 Vector v = new Vector();
                 v.add(res.getInt(1));
                 v.add(res.getString(2));
@@ -52,15 +52,14 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
                 v.add(res.getString(5));
                 v.add(res.getString(6));
                 v.add(res.getString(7));
-                
+
                 modelo.addRow(v);
                 jTable1.setModel(modelo);
             }
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,6 +79,7 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jRFecha = new javax.swing.JRadioButton();
         jRRUC = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         mcp_jTB_regresar = new javax.swing.JToggleButton();
         mcp_jTB_registrarPago = new javax.swing.JToggleButton();
@@ -103,6 +103,11 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
                 jTF_buscarActionPerformed(evt);
             }
         });
+        jTF_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTF_buscarKeyReleased(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel8.setText("Consultar contrato por:");
@@ -112,6 +117,11 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
         Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarActionPerformed(evt);
+            }
+        });
+        Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BuscarKeyReleased(evt);
             }
         });
 
@@ -131,16 +141,22 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel9.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel9.setText(" aaaa/mm/dd");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jRRUC)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jRFecha)
-                .addGap(17, 17, 17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +164,8 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRFecha)
-                    .addComponent(jRRUC))
+                    .addComponent(jRRUC)
+                    .addComponent(jLabel9))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -157,20 +174,19 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jTF_buscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(20, 20, 20)
+                .addComponent(jTF_buscar)
+                .addGap(7, 7, 7)
+                .addComponent(Buscar)
+                .addGap(22, 22, 22))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel8)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 168, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,21 +259,21 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jL_selecContrato)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Anular)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mcp_jTB_registrarPago)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mcp_jTB_regresar))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Anular)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mcp_jTB_registrarPago)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mcp_jTB_regresar))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCheckBox1)
+                                .addComponent(jL_selecContrato)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -287,9 +303,8 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,13 +316,11 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void inicializar(int valor)
-    {
+    private void inicializar(int valor) {
         //consultar contrato 1
         //registrar cpago 2
         //anular 3
-        switch (valor)
-        {
+        switch (valor) {
             case 1:
                 setTitle("SIGEB | Consultar Contrato"); //Poner el título
                 mcp_jTB_registrarPago.setVisible(false);
@@ -321,23 +334,24 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
                 Anular.setVisible(false);
                 break;
             case 3:
-                setTitle("SIGEB | Anular Contrato"); 
+                setTitle("SIGEB | Anular Contrato");
                 Anular.setVisible(true);
                 mcp_jTB_registrarPago.setVisible(false);
                 jL_selecContrato.setVisible(true);
                 break;
-            
-                
-                  
+
         }
     }
     private void jRFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRFechaActionPerformed
-      this.jRRUC.setSelected(false);
-       if(jRFecha.isSelected())
+        this.jRRUC.setSelected(false);
+        if (jRFecha.isSelected()) {
             jCheckBox1.setEnabled(false);
-        else
+            vald = false;
+        } else {
             jCheckBox1.setEnabled(true);
-                                     
+            vald = false;
+        }
+
     }//GEN-LAST:event_jRFechaActionPerformed
 
     private void mcp_jTB_regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcp_jTB_regresarActionPerformed
@@ -350,52 +364,73 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
     private void mcp_jTB_registrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcp_jTB_registrarPagoActionPerformed
         // TODO add your handling code here:
         mcp_registrarPago mrp = new mcp_registrarPago();
-        int fila=jTable1.getSelectedRow();
-        if(fila !=-1)
-        {
-            String texto =jTable1.getModel().getValueAt(fila, 0).toString();
-            
-            if(!texto.isEmpty() && !jTF_buscar.getText().toString().isEmpty())
-            {
-                mrp.mcp_jTF_numContrato.setText(texto);
-                mrp.setVisible(true);
-                this.setVisible(false);
+        int fila = jTable1.getSelectedRow();
+        if (fila != -1) {
+            if(jTable1.getModel().getValueAt(fila, 0) != null)
+            {    
+                String num = jTable1.getModel().getValueAt(fila, 0).toString();
+                String valor = jTable1.getModel().getValueAt(fila, 2).toString();
+                if (jRFecha.isSelected() || jRRUC.isSelected())
+                {    
+                    if (!num.isEmpty() ) {
+                        mrp.mcp_jTF_numContrato.setText(num);
+                        mrp.valor_jtf_mcp.setText(valor);
+                        mrp.setVisible(true);
+                        this.setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error, ingrese el Ruc o la fecha");
+                    }
+                }
+                else if(jCheckBox1.isSelected())
+                {
+                    mrp.mcp_jTF_numContrato.setText(num);
+                    mrp.valor_jtf_mcp.setText(valor);
+                    mrp.setVisible(true);
+                    this.setVisible(false);
+                }
             }
             else
-            {
-                JOptionPane.showMessageDialog(null,"Error, ingrese el Ruc o la fecha");
-            }
-        }    
-        else
+                JOptionPane.showMessageDialog(null, "Seleccionó una fila vacía");
+        } else {
             JOptionPane.showMessageDialog(null, "Error, Seleccione una fila");
-        
-        
-        
+        }
+
+
     }//GEN-LAST:event_mcp_jTB_registrarPagoActionPerformed
 
     private void AnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnularActionPerformed
         // TODO add your handling code here:
         int fila = jTable1.getSelectedRow();
-        if(fila!=-1)
-        {
-            Procedimientos pr = new Procedimientos();
-            try {
-                String ruc = jTable1.getModel().getValueAt(fila,4).toString();
-                String cod = jTable1.getModel().getValueAt(fila,0).toString();
-                pr.anularContrato(cod, ruc);
-                JOptionPane.showMessageDialog(null, "Contrato anulado de manera satisfactoria");
-            } catch (SQLException ex) {
-                Logger.getLogger(mcp_consultarContrato.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(null, "El contrato no se anuló");
+        if (fila != -1) {
+            if (jTable1.getModel().getValueAt(fila, 0) != null )
+            {    
+                Procedimientos pr = new Procedimientos();
+                if (!jTable1.getModel().getValueAt(fila, 6).toString().equalsIgnoreCase("anulado"))
+                {  
+                    try {
+                        String ruc = jTable1.getModel().getValueAt(fila, 4).toString();
+                        String cod = jTable1.getModel().getValueAt(fila, 0).toString();
+                        pr.anularContrato(cod, ruc);
+                        JOptionPane.showMessageDialog(null, "Contrato anulado de manera satisfactoria");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(mcp_consultarContrato.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null, "El contrato no se anuló");
+                    }
+                    menPrinci mp = new menPrinci();
+                    mp.setVisible(true);
+                    this.setVisible(false);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "El contrato ya se encuentra anulado");
+                }
             }
+            else
+                JOptionPane.showMessageDialog(null, "Fila seleccionada vacía");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error, Seleccione un contrato");
         }
-        else
-        {
-            JOptionPane.showMessageDialog(null,"Error, Seleccione un contrato" );
-        }
-        menPrinci mp = new menPrinci();
-        mp.setVisible(true);
-        this.setVisible(false);
+       
     }//GEN-LAST:event_AnularActionPerformed
 
     private void jTF_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_buscarActionPerformed
@@ -404,36 +439,7 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
     }//GEN-LAST:event_jTF_buscarActionPerformed
 
     private void jTF_buscarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTF_buscarFocusLost
-    boolean resultado;
-    int val = 1;
-    if(this.jRRUC.isSelected()){
-        
-        resultado = fu.ValidacionRUC(this.jTF_buscar.getText());
-        if(!resultado)
-        {
-            JOptionPane.showMessageDialog(null,"Número de RUC ingresado es incorrecto\n Ingrese nuevamente");
-            this.jTF_buscar.setText("");
-            val = 0;
-        }
-    }else if(this.jRFecha.isSelected())
-    {
-        resultado = fu.validacionFecha(this.jTF_buscar.getText());
-        if(!resultado)
-        {
-            JOptionPane.showMessageDialog(null,"Fecha ingresada es incorrecto\n Ingrese nuevamente");
-            this.jTF_buscar.setText("");
-            val=0;
-        }
-    }
-    else
-    {
-        JOptionPane.showMessageDialog(null,"Seleccione RUC o fecha");
-        val = 0;
-    }    
-     if(val ==1 )
-     {
-         this.vald = true;
-     }
+
     }//GEN-LAST:event_jTF_buscarFocusLost
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -441,34 +447,29 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
         //System.out.println(this.jRRUC.getSelectedIcon().toString());
         String texto = jTF_buscar.getText();
         String consulta = "";
-        if (vald)
-        {   
-            if (!texto.isEmpty())
-            {    
-                if (jRRUC.isSelected())
-                {
-                    consulta= "Select * from Contrato where ruc ="+texto;
+        if (vald) {
+            if (!texto.isEmpty()) {
+                if (jRRUC.isSelected()) {
+                    consulta = "Select * from Contrato where ruc =" + texto;
                     cargarArticulo(consulta);
 
-                }
-                else if (jRFecha.isSelected())
-                {
-                    consulta= "Select * from Contrato where fecha ="+texto;
+                } else if (jRFecha.isSelected()) {
+                    consulta = "Select * from Contrato where fecha_realizacion ='"+ texto+"'";
                     cargarArticulo(consulta);
-                }   
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, Ingrese el ruc o la fecha");
             }
-            else
-                JOptionPane.showMessageDialog(null,"Error, Ingrese el ruc o la fecha");
-        }
-        else
+        } else {
             JOptionPane.showMessageDialog(null, "Error, Ingresó mal la fecha o el ruc");
-        
+        }
+
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void jRRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRRUCActionPerformed
         // TODO add your handling code here:
         this.jRFecha.setSelected(false);
-        if(jRRUC.isSelected())
+        if (jRRUC.isSelected())
             jCheckBox1.setEnabled(false);
         else
             jCheckBox1.setEnabled(true);
@@ -476,29 +477,65 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
 
     private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_jCheckBox1StateChanged
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
-        if(jCheckBox1.isSelected())
-        {
-           
+        if (jCheckBox1.isSelected()) {
+
             cargarArticulo(" select * from  contrato order by (fecha_realizacion) desc");
             jTF_buscar.setEnabled(false);
             Buscar.setEnabled(false);
             jRFecha.setEnabled(false);
             jRRUC.setEnabled(false);
-        }
-        else
-        {    
+        } else {
             jTF_buscar.setEnabled(true);
             Buscar.setEnabled(true);
             jRFecha.setEnabled(true);
             jRRUC.setEnabled(true);
-        
+
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jTF_buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTF_buscarKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            boolean resultado;
+            int val = 1;
+            if (this.jRRUC.isSelected()) {
+
+                resultado = fu.ValidacionRUC(this.jTF_buscar.getText());
+                if (!resultado) {
+                    JOptionPane.showMessageDialog(null, "Número de RUC ingresado es incorrecto\n Ingrese nuevamente");
+                    this.jTF_buscar.setText("");
+                    val = 0;
+                }
+            } else if (this.jRFecha.isSelected()) {
+                resultado = fu.validacionFecha(this.jTF_buscar.getText());
+                if (!resultado) {
+                    JOptionPane.showMessageDialog(null, "Fecha ingresada es incorrecto\n Ingrese nuevamente");
+                    this.jTF_buscar.setText("");
+                    val = 0;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione RUC o fecha");
+                val = 0;
+            }
+            if (val == 1) {
+                this.vald = true;
+                Buscar.requestFocus();
+                //Buscar.doClick();
+            }
+            
+            
+        }
+
+    }//GEN-LAST:event_jTF_buscarKeyReleased
+
+    private void BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -542,6 +579,7 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jL_selecContrato;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
