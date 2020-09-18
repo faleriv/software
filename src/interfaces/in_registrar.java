@@ -1,5 +1,6 @@
 package interfaces;
 
+import codigo.Funciones;
 import conexion.Procedimientos;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,6 +20,8 @@ public class in_registrar extends javax.swing.JFrame {
     public String cod;
     public String nombre;
     public String estado;
+    
+    Funciones fu = new Funciones();
     
     public in_registrar(int valor_inicial) {
 
@@ -125,6 +128,11 @@ public class in_registrar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         in_jTF_cod.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        in_jTF_cod.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                in_jTF_codFocusLost(evt);
+            }
+        });
         in_jTF_cod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 in_jTF_codActionPerformed(evt);
@@ -407,6 +415,17 @@ public class in_registrar extends javax.swing.JFrame {
     private void in_jTF_estadoActuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_jTF_estadoActuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_in_jTF_estadoActuActionPerformed
+
+    private void in_jTF_codFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_in_jTF_codFocusLost
+        boolean resultado1,resultado2;
+        resultado1=fu.validacionDigitosCodigoEquipo(this.in_jTF_cod.getText());
+        resultado2=fu.validacionCodigoEquipo(this.in_jTF_cod.getText());
+        if(!resultado1){
+            JOptionPane.showMessageDialog(null,"El código ingresado es incorrecto\n Ingrese un codigo con 13 o 15 dígitos","Error ingreso codigo de equipo", JOptionPane.ERROR_MESSAGE);
+        }else if(!resultado2){
+                JOptionPane.showMessageDialog(null,"El código ingresado es incorrecto\n Solo se permite el ingreso de caracteres alfanuméricos","Error ingreso codigo de equipo", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_in_jTF_codFocusLost
 
     /**
      * @param args the command line arguments
