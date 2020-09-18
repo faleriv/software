@@ -5,6 +5,14 @@
  */
 package interfaces;
 
+import codigo.Funciones;
+import conexion.Procedimientos;
+import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author valer
@@ -17,7 +25,7 @@ public class mcp_registrarPago extends javax.swing.JFrame {
     public mcp_registrarPago() {
         initComponents();
         mcp_jTF_numContrato.setEnabled(false);
-        
+        valor_jtf_mcp.setEnabled(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
         setTitle("SIGEB | Registrar Pago"); //Poner el título
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
@@ -35,32 +43,47 @@ public class mcp_registrarPago extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        fecha_jtf_mcp = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        valor_jtf_mcp = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         mcp_jTF_numContrato = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        fecha_jtf_mcp.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        fecha_jtf_mcp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fecha_jtf_mcpKeyReleased(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jLabel5.setText("Fecha:");
+        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel5.setText("aaaa/mm/dd");
 
-        jTextField2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        valor_jtf_mcp.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        valor_jtf_mcp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                valor_jtf_mcpKeyReleased(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jLabel6.setText("Valor:");
+        jLabel6.setText("Valor: $");
 
         mcp_jTF_numContrato.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel7.setText("Número contrato:");
+
+        jLabel8.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabel8.setText("Fecha:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -68,19 +91,21 @@ public class mcp_registrarPago extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(valor_jtf_mcp, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mcp_jTF_numContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(mcp_jTF_numContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fecha_jtf_mcp, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -88,11 +113,12 @@ public class mcp_registrarPago extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(fecha_jtf_mcp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valor_jtf_mcp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -175,11 +201,30 @@ public class mcp_registrarPago extends javax.swing.JFrame {
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
+        if(!fecha_jtf_mcp.getText().isEmpty() )
+        {
+            Procedimientos pro = new Procedimientos();
+            String arr[] = new String[2];
+            arr[0]=fecha_jtf_mcp.getText();
+            arr[1]=mcp_jTF_numContrato.getText();
+            try {
+                pro.registro(arr, "RegistroPagos");
+                JOptionPane.showMessageDialog(null, "Pago registrado de manera exitosa");
+            } catch (SQLException ex) {
+                Logger.getLogger(mcp_registrarPago.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error, el pago no se registró.");
+            }
+            //Menu principal
+            menPrinci mp = new menPrinci();
+            mp.setVisible(true);
+            this.setVisible(false);
+            
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Error, campo fecha está vacío, corrija porfavor.");
+        }
         
         
-        menPrinci mp = new menPrinci();
-        mp.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
@@ -188,6 +233,41 @@ public class mcp_registrarPago extends javax.swing.JFrame {
         mp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void fecha_jtf_mcpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fecha_jtf_mcpKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            Funciones fu = new Funciones();
+            if(fu.validacionFecha(fecha_jtf_mcp.getText()))
+            {
+                valor_jtf_mcp.requestFocus();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Error, fecha ingresada incorrecta");
+                fecha_jtf_mcp.requestFocus();
+            }
+                
+        }
+    }//GEN-LAST:event_fecha_jtf_mcpKeyReleased
+
+    private void valor_jtf_mcpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valor_jtf_mcpKeyReleased
+        // TODO add your handling code here:
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            Funciones fu = new Funciones();
+            if(fu.validacionCostoMensual(valor_jtf_mcp.getText()))
+            {
+                jToggleButton2.requestFocus();
+            }
+            else
+            {
+                valor_jtf_mcp.requestFocus();
+                JOptionPane.showMessageDialog(null,"Error, valor ingresado incorrecta");
+            }
+        }
+    }//GEN-LAST:event_valor_jtf_mcpKeyReleased
 
     /**
      * @param args the command line arguments
@@ -225,16 +305,17 @@ public class mcp_registrarPago extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField fecha_jtf_mcp;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     public javax.swing.JTextField mcp_jTF_numContrato;
+    public javax.swing.JTextField valor_jtf_mcp;
     // End of variables declaration//GEN-END:variables
 }
