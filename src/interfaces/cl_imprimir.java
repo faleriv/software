@@ -27,7 +27,7 @@ public class cl_imprimir extends javax.swing.JFrame {
      * Creates new form cl_imprimir
      */
     public cl_imprimir() {
-
+        //Prueba de push
         initComponents();
         ButtonGroup group = new ButtonGroup();
         group.add(cliente_activo);
