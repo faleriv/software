@@ -5,6 +5,14 @@
  */
 package interfaces;
 
+import codigo.Funciones;
+import com.sun.glass.events.KeyEvent;
+import static interfaces.cl_consultar.res;
+import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author valer
@@ -14,13 +22,13 @@ public class in_consultarEstado extends javax.swing.JFrame {
     /**
      * Creates new form in_consultarEstado
      */
+    Funciones fu = new Funciones();
     public in_consultarEstado() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
         setTitle("SIGEB | Consultar estado equipo"); //Poner el título
         this.setLocationRelativeTo(null); //posición en el centro de la pantalla
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,12 +41,12 @@ public class in_consultarEstado extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        in_jR_Nombre = new javax.swing.JRadioButton();
+        in_jR_Codigo = new javax.swing.JRadioButton();
+        in_jTF_Campo = new javax.swing.JTextField();
+        in_jB_Buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        in_jT_ConsultaEstado = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,21 +54,41 @@ public class in_consultarEstado extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel5.setText("Buscar por:");
 
-        jRadioButton1.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
-        jRadioButton1.setText("Nombre Equipo");
-
-        jRadioButton2.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
-        jRadioButton2.setText("Código Equipo");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        in_jR_Nombre.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
+        in_jR_Nombre.setText("Nombre Equipo");
+        in_jR_Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                in_jR_NombreActionPerformed(evt);
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        in_jR_Codigo.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
+        in_jR_Codigo.setText("Código Equipo");
+        in_jR_Codigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                in_jR_CodigoActionPerformed(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jButton1.setText("Buscar");
+        in_jTF_Campo.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        in_jTF_Campo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                in_jTF_CampoActionPerformed(evt);
+            }
+        });
+        in_jTF_Campo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                in_jTF_CampoKeyPressed(evt);
+            }
+        });
+
+        in_jB_Buscar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        in_jB_Buscar.setText("Buscar");
+        in_jB_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                in_jB_BuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -70,40 +98,48 @@ public class in_consultarEstado extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jRadioButton1)
+                        .addComponent(in_jR_Nombre)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButton2))
+                        .addComponent(in_jR_Codigo))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(in_jTF_Campo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(in_jB_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(in_jR_Nombre)
+                    .addComponent(in_jR_Codigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(in_jTF_Campo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(in_jB_Buscar))
                 .addGap(0, 2, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        in_jT_ConsultaEstado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Código ", "Nombre de Equipo", "Estado"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(in_jT_ConsultaEstado);
 
         jButton2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jButton2.setText("Regresar");
@@ -135,10 +171,10 @@ public class in_consultarEstado extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(jButton2)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,9 +191,12 @@ public class in_consultarEstado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    private void in_jR_CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_jR_CodigoActionPerformed
+           if(this.in_jR_Codigo.isSelected()){
+           this.in_jR_Nombre.setSelected(false);
+           this.in_jTF_Campo.setText("");
+        }
+    }//GEN-LAST:event_in_jR_CodigoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -166,6 +205,73 @@ public class in_consultarEstado extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void in_jR_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_jR_NombreActionPerformed
+        // TODO add your handling code here:
+        if(this.in_jR_Nombre.isSelected()){
+           this.in_jR_Codigo.setSelected(false);
+           this.in_jTF_Campo.setText("");
+        }
+    }//GEN-LAST:event_in_jR_NombreActionPerformed
+
+    private void in_jTF_CampoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_in_jTF_CampoKeyPressed
+        boolean valor;
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(this.in_jR_Nombre.isSelected()){
+                valor=fu.validacionNombreEquipo(this.in_jTF_Campo.getText());
+                if(!valor){
+                    JOptionPane.showMessageDialog(null,"Nombre de equipo incorrecto","Consulta información de equipo", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    this.in_jB_Buscar.requestFocus();
+                }
+            }else if (this.in_jR_Codigo.isSelected()){
+                valor= fu.validacionCodigoEquipo(this.in_jTF_Campo.getText());
+                if(!valor){
+                    JOptionPane.showMessageDialog(null,"Código de equipo incorrecto","Consulta información de equipo", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    this.in_jB_Buscar.requestFocus();
+                }
+                
+            }
+        }
+    }//GEN-LAST:event_in_jTF_CampoKeyPressed
+
+    private void in_jTF_CampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_jTF_CampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_in_jTF_CampoActionPerformed
+
+    private void in_jB_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_jB_BuscarActionPerformed
+         // TODO add your handling code here:
+         if(! this.in_jR_Nombre.isSelected()&&! this.in_jR_Codigo.isSelected()){
+          this.CargaTabla("select cod_equipo, nombre_equipo, estado_equipo from Equipo");
+         }
+         else if(this.in_jR_Nombre.isSelected()){
+             this.CargaTabla("select cod_equipo, nombre_equipo, estado_equipo from Equipo where nombre_equipo = '"+this.in_jTF_Campo.getText()+"'");             
+         }
+         else if(this.in_jR_Codigo.isSelected()){
+             this.CargaTabla("select cod_equipo, nombre_equipo, estado_equipo from Equipo where cod_equipo = '"+this.in_jTF_Campo.getText()+"'");
+         }
+    }//GEN-LAST:event_in_jB_BuscarActionPerformed
+    public void CargaTabla(String consulta){
+        DefaultTableModel modelo = (DefaultTableModel) this.in_jT_ConsultaEstado.getModel();
+        modelo.setRowCount(0);
+        res = conexion.Conexion.consulta(consulta);
+        try
+        {
+            while(res.next())
+            {
+                Vector v = new Vector();
+                v.add(res.getString(1));
+                v.add(res.getString(2));
+                v.add(res.getString(3));
+                modelo.addRow(v);
+                this.in_jT_ConsultaEstado.setModel(modelo);               
+            }
+        }
+        catch(SQLException e)
+        {
+        
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -202,15 +308,15 @@ public class in_consultarEstado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton in_jB_Buscar;
+    private javax.swing.JRadioButton in_jR_Codigo;
+    private javax.swing.JRadioButton in_jR_Nombre;
+    private javax.swing.JTextField in_jTF_Campo;
+    private javax.swing.JTable in_jT_ConsultaEstado;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

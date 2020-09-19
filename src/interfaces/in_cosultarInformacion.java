@@ -43,10 +43,7 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
      */
     
     @SuppressWarnings("unchecked")
-    
-  
-    
-      private void inicializar(int valor)
+     private void inicializar(int valor)
     {
         //editar ->1
         //consutlar ->2
@@ -69,7 +66,7 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
     
         public void cargarTabla(String query) throws SQLException
     {
-        DefaultTableModel modelo = (DefaultTableModel) jTTablaEquipos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) in_jT_TablaEquipo.getModel();
         modelo.setRowCount(0);
         res = conexion.Conexion.consulta(query);
         try
@@ -125,12 +122,12 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
         jRadioButton9 = new javax.swing.JRadioButton();
         jRadioButton10 = new javax.swing.JRadioButton();
         jToggleButton4 = new javax.swing.JToggleButton();
-        in_jP_ingresarCod = new javax.swing.JPanel();
+        in_jB_ingresarCod = new javax.swing.JPanel();
         in_jL_ingreso = new javax.swing.JLabel();
         in_jTF_buscar = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JToggleButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTTablaEquipos = new javax.swing.JTable();
+        in_jT_TablaEquipo = new javax.swing.JTable();
         jToggleButton6 = new javax.swing.JToggleButton();
         Siguiente = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
@@ -457,35 +454,35 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout in_jP_ingresarCodLayout = new javax.swing.GroupLayout(in_jP_ingresarCod);
-        in_jP_ingresarCod.setLayout(in_jP_ingresarCodLayout);
-        in_jP_ingresarCodLayout.setHorizontalGroup(
-            in_jP_ingresarCodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(in_jP_ingresarCodLayout.createSequentialGroup()
+        javax.swing.GroupLayout in_jB_ingresarCodLayout = new javax.swing.GroupLayout(in_jB_ingresarCod);
+        in_jB_ingresarCod.setLayout(in_jB_ingresarCodLayout);
+        in_jB_ingresarCodLayout.setHorizontalGroup(
+            in_jB_ingresarCodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(in_jB_ingresarCodLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(in_jP_ingresarCodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(in_jP_ingresarCodLayout.createSequentialGroup()
+                .addGroup(in_jB_ingresarCodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(in_jB_ingresarCodLayout.createSequentialGroup()
                         .addComponent(in_jL_ingreso)
                         .addContainerGap(234, Short.MAX_VALUE))
-                    .addGroup(in_jP_ingresarCodLayout.createSequentialGroup()
+                    .addGroup(in_jB_ingresarCodLayout.createSequentialGroup()
                         .addComponent(in_jTF_buscar)
                         .addGap(18, 18, 18)
                         .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))))
         );
-        in_jP_ingresarCodLayout.setVerticalGroup(
-            in_jP_ingresarCodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(in_jP_ingresarCodLayout.createSequentialGroup()
+        in_jB_ingresarCodLayout.setVerticalGroup(
+            in_jB_ingresarCodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(in_jB_ingresarCodLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(in_jL_ingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(in_jP_ingresarCodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(in_jB_ingresarCodLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(in_jTF_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBBuscar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTTablaEquipos.setModel(new javax.swing.table.DefaultTableModel(
+        in_jT_TablaEquipo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -504,7 +501,7 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTTablaEquipos);
+        jScrollPane3.setViewportView(in_jT_TablaEquipo);
 
         jToggleButton6.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jToggleButton6.setText("Regresar");
@@ -571,7 +568,7 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(in_jP_ingresarCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(in_jB_ingresarCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -579,7 +576,7 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(in_jP_ingresarCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(in_jB_ingresarCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -655,13 +652,13 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
         // TODO add your handling code here:
         //1 --> Inventario | Registraar equipo
         //2--> Inventario | Editar equipo
-        int fila = jTTablaEquipos.getSelectedRow();
+        int fila = in_jT_TablaEquipo.getSelectedRow();
         if(fila !=-1)
         {
             iregis = new in_registrar(2);
-            iregis.in_jTF_cod.setText(jTTablaEquipos.getModel().getValueAt(fila, 0).toString());
-            iregis.in_jTF_nombre.setText(jTTablaEquipos.getModel().getValueAt(fila, 1).toString());
-            iregis.in_jTF_estadoActu.setText(jTTablaEquipos.getModel().getValueAt(fila, 2).toString());
+            iregis.in_jTF_cod.setText(in_jT_TablaEquipo.getModel().getValueAt(fila, 0).toString());
+            iregis.in_jTF_nombre.setText(in_jT_TablaEquipo.getModel().getValueAt(fila, 1).toString());
+            iregis.in_jTF_estadoActu.setText(in_jT_TablaEquipo.getModel().getValueAt(fila, 2).toString());
             iregis.iniciarComboBox();
             iregis.setVisible(true);
             this.setVisible(false);
@@ -741,9 +738,10 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Siguiente;
+    private javax.swing.JPanel in_jB_ingresarCod;
     private javax.swing.JLabel in_jL_ingreso;
-    private javax.swing.JPanel in_jP_ingresarCod;
     private javax.swing.JTextField in_jTF_buscar;
+    private javax.swing.JTable in_jT_TablaEquipo;
     private javax.swing.JToggleButton jBBuscar;
     private javax.swing.JComboBox<String> jCCampo;
     private javax.swing.JLabel jLabel1;
@@ -771,7 +769,6 @@ public class in_cosultarInformacion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTTablaEquipos;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;

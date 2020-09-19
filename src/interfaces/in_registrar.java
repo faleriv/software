@@ -430,6 +430,18 @@ public class in_registrar extends javax.swing.JFrame {
                     Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
+        else if (actual.equalsIgnoreCase("mantenimiento"))
+        {
+            String cdg=in_jTF_cod.getText();
+                String st=jCB_estado.getSelectedItem().toString();
+                try {
+                    Procedimientos pro = new Procedimientos();
+                    pro.actualizarEquipo(cdg, st, null);
+                    JOptionPane.showMessageDialog(null,"Equipo actualizado exitosamente");
+                } catch (SQLException ex) {
+                    Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
         if (band != 1)
         {
             menPrinci mpr= new menPrinci();
@@ -458,7 +470,7 @@ public class in_registrar extends javax.swing.JFrame {
                 boolean resultado1,resultado2,resultado3;
                 resultado1=fu.validacionDigitosCodigoEquipo(this.in_jTF_cod.getText());
                 resultado2=fu.validacionCodigoEquipo(this.in_jTF_cod.getText());
-                resultado3=this.existeRegistro("select * from Equipo where cod_equipo = "+in_jTF_cod.getText());
+                resultado3=this.existeRegistro("select * from Equipo where cod_equipo = '"+in_jTF_cod.getText()+"'");
                 if(!resultado1 || !resultado2){
                     JOptionPane.showMessageDialog(null,"Código de equipo incorrecto","Error código de equipo", JOptionPane.ERROR_MESSAGE);
                     this.in_jTF_cod.requestFocus();
