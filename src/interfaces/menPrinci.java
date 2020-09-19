@@ -808,7 +808,7 @@ public class menPrinci extends javax.swing.JFrame {
       mcp.setVisible(true);
       mcp.setLocationRelativeTo(null);
       this.setVisible(false);
-      this.dispose();
+     
     }//GEN-LAST:event_jMenuItem35ActionPerformed
 
     private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
