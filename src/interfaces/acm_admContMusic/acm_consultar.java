@@ -370,7 +370,7 @@ public class acm_consultar extends javax.swing.JFrame {
         
         if (jRadioButton1.isSelected()) {//Género
             try {
-                campo = "select * from Cancion where género= '"+jComboBox1.getSelectedItem().toString() +"'";
+                campo = "select * from Cancion where nombre_cancion= '"+jComboBox1.getSelectedItem().toString() +"'";
                 cargarTabla(campo);
             } catch (SQLException ex) {
                 Logger.getLogger(acm_consultar.class.getName()).log(Level.SEVERE, null, ex);

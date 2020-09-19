@@ -34,7 +34,7 @@ public class Conexion {
         try
         {
             //contacto = DriverManager.getConnection(url,"sa","Diego2420347");//Diego
-            contacto = DriverManager.getConnection(url,"sa","fielEsJesus");//Vale
+            //contacto = DriverManager.getConnection(url,"sa","fielEsJesus");//Vale
             //contacto = DriverManager.getConnection(url,"sa","12345");//Jose
             contacto = DriverManager.getConnection(url,"sa","123456K");//Kari
         }

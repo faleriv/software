@@ -5,14 +5,23 @@
  */
 package interfaces.acm_admContMusic;
 
+import static interfaces.acm_admContMusic.acm_consultar.res;
 import interfaces.menPrinci;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author HP
  */
 public class acm_eliminarCancion extends javax.swing.JFrame {
-
+    static ResultSet res;
+    acm_registrarCancion mrc;
     /**
      * Creates new form acm_eliminar
      */
@@ -22,6 +31,38 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
         setTitle("SIGEB | Eliminar canción"); //Poner el título
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null); //posición en el centro de la pantalla
+    }
+    
+    public acm_eliminarCancion(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+
+    public JTable getTablacanciones() {
+        return jTable1;
+    }
+
+    public void setTablacancion(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+
+    public void cargarTabla(String query) throws SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+        res = conexion.Conexion.consulta(query);
+        try {
+            while (res.next()) {
+                Vector v = new Vector();
+                v.add(res.getString(1));
+                v.add(res.getString(2));
+                v.add(res.getString(3));
+                v.add(res.getString(4));
+                modelo.addRow(v);
+                jTable1.setModel(modelo);
+
+            }
+        } catch (SQLException e) {
+
+        }
     }
 
     /**
@@ -33,6 +74,7 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -51,8 +93,10 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel1.setText("Ingrese el nombre de la cancion o artista:");
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Artista");
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Canción");
 
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -75,6 +119,11 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
         jLabel4.setText("Seleccione la canción a eliminar:");
 
         jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Eliminar");
 
@@ -92,34 +141,30 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jRadioButton1)
                                         .addGap(63, 63, 63)
                                         .addComponent(jRadioButton2))
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
                                     .addComponent(jLabel3)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton1)))
-                                .addGap(51, 51, 51))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jButton2)
-                        .addGap(78, 78, 78)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jButton1))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addComponent(jButton2)
+                                .addGap(78, 78, 78)
+                                .addComponent(jButton3)))
+                        .addGap(51, 51, 51)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -161,6 +206,24 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String campo;
+        if (jRadioButton1.isSelected()) {//Género
+            try {
+                campo = "select * from Cancion where nombre_artista= '"+jTextField1.getText() +"'";
+                cargarTabla(campo);
+            } catch (SQLException ex) {
+                Logger.getLogger(acm_consultar.class.getName()).log(Level.SEVERE, null, ex);}
+            } else if (jRadioButton2.isSelected()) {
+            try {
+                campo = "select * from Cancion where nombre_cancion= '"+jTextField1.getText()+"'";
+                cargarTabla(campo);
+            } catch (SQLException ex) {
+                Logger.getLogger(acm_consultar.class.getName()).log(Level.SEVERE, null, ex);
+            }}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -198,6 +261,7 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
