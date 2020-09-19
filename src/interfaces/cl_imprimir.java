@@ -297,7 +297,7 @@ public class cl_imprimir extends javax.swing.JFrame {
                 Logger.getLogger(cl_imprimir.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (cliente_inactivo.isSelected()) {
-            campo = "select * from cliente where estado= 'activo'";
+            campo = "select * from cliente where estado= 'inactivo'";
             try {
                 cargarTabla(campo);
             } catch (SQLException ex) {
