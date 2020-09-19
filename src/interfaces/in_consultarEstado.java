@@ -17,7 +17,7 @@ public class in_consultarEstado extends javax.swing.JFrame {
     public in_consultarEstado() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
-        setTitle("SIGEB | Consultar estado equipo"); //Poner el título
+        setTitle("SIGEB | Consulta estado equipo"); //Poner el título
         this.setLocationRelativeTo(null); //posición en el centro de la pantalla
     }
 

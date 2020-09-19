@@ -29,7 +29,7 @@ public class mcp_calcular extends javax.swing.JFrame {
     public mcp_calcular() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
-        this.setTitle("SIGEB | Calcular"); //Poner el título
+        this.setTitle("SIGEB | Calculo pagos"); //Poner el título
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null); //posición en el centro de la pantalla
     }

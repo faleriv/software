@@ -69,7 +69,7 @@ public class mcp_registrarContrato extends javax.swing.JFrame {
 
             this.mcp_jTF_ruc.setEnabled(false);
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
-            setTitle("SIGEB | Registrar contrato"); //Poner el título
+            setTitle("SIGEB | Registro contrato"); //Poner el título
             //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
             this.setLocationRelativeTo(null);
             fecha_jtf.setText("aaaa/mm/dd");

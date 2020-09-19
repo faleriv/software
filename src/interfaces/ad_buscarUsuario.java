@@ -173,12 +173,12 @@ public class ad_buscarUsuario extends javax.swing.JFrame {
         switch (valor)
         {
             case 1:
-                this.setTitle("SIGEB | Eliminar usuario");
+                this.setTitle("SIGEB | Eliminación usuario");
                 this.jToggleButton_eliminar.setVisible(true);
                 this.jToggleButton_cambiarContraseña.setVisible(false);
                 break;
             case 2:
-                this.setTitle("SIGEB | Cambiar contraseña de usuario");
+                this.setTitle("SIGEB | Cambio contraseña de usuario");
                 this.jToggleButton_eliminar.setVisible(false);
                 this.jToggleButton_cambiarContraseña.setVisible(true);
                 break;

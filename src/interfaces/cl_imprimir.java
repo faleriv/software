@@ -33,7 +33,7 @@ public class cl_imprimir extends javax.swing.JFrame {
         group.add(cliente_activo);
         group.add(cliente_inactivo);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
-        setTitle("SIGEB | Imprimir Cliente"); //Poner el título
+        setTitle("SIGEB | Impresión  cliente"); //Poner el título
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null); //posición en el centro de la pantalla
     }

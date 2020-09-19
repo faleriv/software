@@ -16,7 +16,7 @@ public class ad_registrarUsuario extends javax.swing.JFrame {
      */
     public ad_registrarUsuario() {
         initComponents();
-        this.setTitle("SIGEB | Agregar Usuario");
+        this.setTitle("SIGEB | Agregación usuario");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }

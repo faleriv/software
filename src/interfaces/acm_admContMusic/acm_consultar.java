@@ -85,13 +85,13 @@ public class acm_consultar extends javax.swing.JFrame {
         //imprimir 2
         switch (valor) {
             case 1:
-                setTitle("SIGEB | Consulta de canciones"); //Poner el título
+                setTitle("SIGEB | Consulta canciones"); //Poner el título
                 acm_jL_imprimir.setVisible(false);
                 jTB_imprimir.setVisible(false);
 
                 break;
             case 2:
-                setTitle("SIGEB | Imprimir canciones");
+                setTitle("SIGEB | Impresión canciones");
                 acm_jL_imprimir.setVisible(true);
                 jTB_imprimir.setVisible(true);
                 jL_consultar.setVisible(false);

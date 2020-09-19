@@ -27,7 +27,7 @@ public class mcp_imprimir extends javax.swing.JFrame {
     public mcp_imprimir() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
-        setTitle("SIGEB | Imprimir"); //Poner el título
+        setTitle("SIGEB | Impresión reporte de contratos"); //Poner el título
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null); 
     }

@@ -322,19 +322,19 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
         //anular 3
         switch (valor) {
             case 1:
-                setTitle("SIGEB | Consultar Contrato"); //Poner el título
+                setTitle("SIGEB | Consulta contrato"); //Poner el título
                 mcp_jTB_registrarPago.setVisible(false);
                 jL_selecContrato.setVisible(false);
                 Anular.setVisible(false);
                 break;
             case 2:
-                setTitle("SIGEB | Registrar Pago"); //Poner el título
+                setTitle("SIGEB | Registro pago"); //Poner el título
                 mcp_jTB_registrarPago.setVisible(true);
                 jL_selecContrato.setVisible(false);
                 Anular.setVisible(false);
                 break;
             case 3:
-                setTitle("SIGEB | Anular Contrato");
+                setTitle("SIGEB | Anulación contrato");
                 Anular.setVisible(true);
                 mcp_jTB_registrarPago.setVisible(false);
                 jL_selecContrato.setVisible(true);
