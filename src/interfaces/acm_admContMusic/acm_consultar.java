@@ -415,12 +415,12 @@ public class acm_consultar extends javax.swing.JFrame {
 
         if (jRadioButton1.isSelected()) {
            
-                f.imprimirTabla(jTable1,"Impresión de tabla lista de canciones de un género","Diego", true);
+                f.imprimirTabla(jTable1,"Lista de canciones de un género","THEBLOOP", true);
            
                
             }
         else if (jRadioButton2.isSelected()) {
-            f.imprimirTabla(jTable1, "Impresión de tabla lista de canciones de un artista", "Diego", true);
+            f.imprimirTabla(jTable1, "Lista de canciones de un artista", "THEBLOOP", true);
         }
         
         menPrinci mp = new menPrinci();
