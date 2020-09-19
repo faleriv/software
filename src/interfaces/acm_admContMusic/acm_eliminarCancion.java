@@ -5,13 +5,16 @@
  */
 package interfaces.acm_admContMusic;
 
+import conexion.Procedimientos;
 import static interfaces.acm_admContMusic.acm_consultar.res;
+import interfaces.mcp_consultarContrato;
 import interfaces.menPrinci;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -95,9 +98,19 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Artista");
+        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton1MouseClicked(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Canción");
+        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton2MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel3.setText("Seleccione como buscar la canción");
@@ -126,6 +139,11 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
         });
 
         jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Salir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +227,8 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String campo;
-        if (jRadioButton1.isSelected()) {//Género
+        if (jRadioButton1.isSelected()) {//
+            
             try {
                 campo = "select * from Cancion where nombre_artista= '"+jTextField1.getText() +"'";
                 cargarTabla(campo);
@@ -223,6 +242,29 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
                 Logger.getLogger(acm_consultar.class.getName()).log(Level.SEVERE, null, ex);
             }}
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+         int[] rows = jTable1.getSelectedRows();
+         for(int i=0;i<rows.length;i++){
+         model.removeRow(rows[i]-i);
+         jTextField1.setText("");
+   }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+        // TODO add your handling code here:
+        if (jRadioButton1.isSelected()) {//
+            jTextField1.setText("");}
+    }//GEN-LAST:event_jRadioButton1MouseClicked
+
+    private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
+        // TODO add your handling code here:
+        if (jRadioButton2.isSelected()) {//
+            jTextField1.setText("");}
+    }//GEN-LAST:event_jRadioButton2MouseClicked
 
     /**
      * @param args the command line arguments
