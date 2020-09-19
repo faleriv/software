@@ -445,17 +445,22 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
         //System.out.println(this.jRRUC.getSelectedIcon().toString());
+        Funciones f = new Funciones();
         String texto = jTF_buscar.getText();
         String consulta = "";
         if (vald) {
             if (!texto.isEmpty()) {
                 if (jRRUC.isSelected()) {
-                    consulta = "Select * from Contrato where ruc =" + texto;
-                    cargarArticulo(consulta);
-
+                    
+                    
+                        consulta = "Select * from Contrato where ruc =" + texto;
+                        cargarArticulo(consulta);
+                    
                 } else if (jRFecha.isSelected()) {
-                    consulta = "Select * from Contrato where fecha_realizacion ='"+ texto+"'";
-                    cargarArticulo(consulta);
+                    
+                        consulta = "Select * from Contrato where fecha_realizacion ='"+ texto+"'";
+                        cargarArticulo(consulta);
+                    
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error, Ingrese el ruc o la fecha");

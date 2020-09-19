@@ -18,6 +18,9 @@ public class acm_eliminarGenero extends javax.swing.JFrame {
      */
     public acm_eliminarGenero() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
+        setTitle("SIGEB | Eliminación género"); //Poner el título
     }
 
     /**
