@@ -154,7 +154,18 @@ public class Funciones {
         return band;
 
     }
-
+    public boolean validarNumero(String numero)
+    {
+        boolean band = true;
+        Pattern pat = Pattern.compile("^[1-9]{1,}[0-9]*$");
+        Matcher mat = pat.matcher(numero);
+        
+        if (!mat.matches()) {
+            band = false;
+        }
+        return band;
+    
+    }
     public boolean ValidacionRUC(String ruc) {
         Pattern pat = Pattern.compile("^[0123456789]{10}00(1|2|3){1}");
         Matcher mat = pat.matcher(ruc);
