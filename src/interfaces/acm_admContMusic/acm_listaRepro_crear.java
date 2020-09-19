@@ -8,11 +8,14 @@ package interfaces.acm_admContMusic;
 import conexion.Procedimientos;
 import interfaces.cl_registrar;
 import interfaces.menPrinci;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -98,6 +101,11 @@ public class acm_listaRepro_crear extends javax.swing.JFrame {
         acm_jL_imprimir.setText("Seleccione canción:");
 
         nombreLista_jtf.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        nombreLista_jtf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nombreLista_jtfKeyReleased(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -348,6 +356,17 @@ public class acm_listaRepro_crear extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese un nombre para la lista de reproducción");
         }
     }//GEN-LAST:event_guardarNombre_jBActionPerformed
+
+    private void nombreLista_jtfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreLista_jtfKeyReleased
+        // TODO add your handling code here:
+        Pattern pat1 = Pattern.compile("[A-Za-zñÑáéíóú\\s]{1,30}");
+        Matcher mat1 = pat1.matcher(nombreLista_jtf.getText());
+        if(evt.getKeyCode() ==KeyEvent.VK_ENTER){
+        if (!mat1.matches()) {
+            JOptionPane.showMessageDialog(null, "El nombre del artista ingresado es incorrecto");
+        } 
+        }
+    }//GEN-LAST:event_nombreLista_jtfKeyReleased
 
     /**
      * @param args the command line arguments

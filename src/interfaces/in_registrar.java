@@ -39,7 +39,11 @@ public class in_registrar extends javax.swing.JFrame {
     }
      public boolean existeRegistro(String sentencia) throws SQLException{
            rs = conexion.Conexion.consulta(sentencia);
-           return rs.next();
+           if(rs.next()){
+               return true;
+           }else{
+            return false;   
+           }
      }
    
 
@@ -332,9 +336,12 @@ public class in_registrar extends javax.swing.JFrame {
             {
                 Procedimientos.registro(arr,"RegistroEquipo");
                 JOptionPane.showMessageDialog(null,"Equipo registrado exitosamente");
+                this.in_jTF_cod.setText("");
+                this.in_jTF_nombre.setText("");
+                
             }
-            else
-                JOptionPane.showMessageDialog(null, "El codigo del equipo ya se encuentra registrado");
+            //else
+              //  JOptionPane.showMessageDialog(null, "El codigo del equipo ya se encuentra registrado");
             
         } catch (SQLException ex) {
             Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
@@ -411,6 +418,18 @@ public class in_registrar extends javax.swing.JFrame {
                 }
             }
         }
+        else if (actual.equalsIgnoreCase("mantenimiento"))
+        {
+            String cdg=in_jTF_cod.getText();
+                String st=jCB_estado.getSelectedItem().toString();
+                try {
+                    Procedimientos pro = new Procedimientos();
+                    pro.actualizarEquipo(cdg, st, null);
+                    JOptionPane.showMessageDialog(null,"Equipo actualizado exitosamente");
+                } catch (SQLException ex) {
+                    Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
         if (band != 1)
         {
             menPrinci mpr= new menPrinci();
@@ -434,23 +453,25 @@ public class in_registrar extends javax.swing.JFrame {
     private void in_jTF_codKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_in_jTF_codKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            
             try {
                 boolean resultado1,resultado2,resultado3;
                 resultado1=fu.validacionDigitosCodigoEquipo(this.in_jTF_cod.getText());
                 resultado2=fu.validacionCodigoEquipo(this.in_jTF_cod.getText());
-                resultado3=this.existeRegistro("select * from Equipo where cod_equipo = "+this.in_jTF_cod.getText());
+                resultado3=this.existeRegistro("select * from Equipo where cod_equipo = "+in_jTF_cod.getText());
                 if(!resultado1 || !resultado2){
-                    JOptionPane.showMessageDialog(null,"Código de equipo incorrecto","Error ingreso codigo de equipo", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Código de equipo incorrecto","Error código de equipo", JOptionPane.ERROR_MESSAGE);
                     this.in_jTF_cod.requestFocus();
                 }else if(resultado3){
                     JOptionPane.showMessageDialog(null,"El código del equipo ingresado ya se encuentra registrado","Error código de equipo", JOptionPane.ERROR_MESSAGE);
                     this.in_jTF_cod.setText("");
                 }else{
                     this.in_jTF_nombre.requestFocus();
-                }   } // TODO add your handling code here:
-            catch (SQLException ex) {
+                }   // TODO add your handling code here:
+            } catch (SQLException ex) {
                 Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
        }
     }//GEN-LAST:event_in_jTF_codKeyPressed
 
