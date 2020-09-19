@@ -277,6 +277,10 @@ public class acm_registrarCancion extends javax.swing.JFrame {
             {
                 Procedimientos.registro(arr,"RegistroCancion");
                 JOptionPane.showMessageDialog(null,"Canción registrada exitosamente");
+                cancion_jtf.setText("");
+                artista_jtf.setText("");
+                año_jtf.setText("");
+                
             }
             else
                 JOptionPane.showMessageDialog(null, "Ya existe una canción registrada con el nombre ingresado");
