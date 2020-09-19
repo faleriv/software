@@ -5,6 +5,15 @@
  */
 package interfaces;
 
+import codigo.Funciones;
+import conexion.Conexion;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,7 +24,7 @@ public class in_consultarArrendados extends javax.swing.JFrame {
 
     /**
      * Creates new form in_consultarArrendados
-     */
+     */  static ResultSet rs;
     public in_consultarArrendados() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
@@ -23,9 +32,21 @@ public class in_consultarArrendados extends javax.swing.JFrame {
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null); //posición en el centro de la pantalla
     }
-    public void cargarTabla()
-    {
-        
+    Funciones fu = new Funciones();
+    Conexion co = new Conexion();
+  public void LlenadoTabla(String sentencia) throws SQLException{
+        DefaultTableModel modelo = (DefaultTableModel) jTtablaEquipos.getModel();
+        modelo.setRowCount(0);
+        rs = conexion.Conexion.consulta(sentencia);
+        while(rs.next()){
+            Vector v = new Vector();
+           v.add(rs.getString(1));
+           v.add(rs.getString(2));
+           v.add(rs.getString(3));
+           v.add(rs.getString(4));
+           modelo.addRow(v);
+           this.jTtablaEquipos.setModel(modelo);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,30 +58,40 @@ public class in_consultarArrendados extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        in_jTF_RUC = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        in_jB_Buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTtablaEquipos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        in_jTF_RUC.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        in_jTF_RUC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                in_jTF_RUCActionPerformed(evt);
+            }
+        });
+        in_jTF_RUC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                in_jTF_RUCKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel1.setText("Ingrese RUC cliente:");
 
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        in_jB_Buscar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        in_jB_Buscar.setText("Buscar");
+        in_jB_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                in_jB_BuscarActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTtablaEquipos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -70,8 +101,16 @@ public class in_consultarArrendados extends javax.swing.JFrame {
             new String [] {
                 "Código", "Nombre", "Estado", "RUC "
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTtablaEquipos);
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel2.setText("Equipos arrendados:");
@@ -96,9 +135,9 @@ public class in_consultarArrendados extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jTextField1)
+                            .addComponent(in_jTF_RUC)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton1))
+                            .addComponent(in_jB_Buscar))
                         .addComponent(jLabel2)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -109,8 +148,8 @@ public class in_consultarArrendados extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(in_jTF_RUC, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(in_jB_Buscar))
                 .addGap(15, 15, 15)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -136,10 +175,18 @@ public class in_consultarArrendados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void in_jB_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_jB_BuscarActionPerformed
+      try {
+            if(this.in_jTF_RUC.getText().isEmpty()){
+                LlenadoTabla("select * from Equipo where estado_equipo= 'Arrendado'");
+            }else{
+                LlenadoTabla("select * from Equipo where ruc="+this.in_jTF_RUC.getText());
+            }
+        } catch (SQLException ex) {
+                Logger.getLogger(in_consultarArrendados.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+    }//GEN-LAST:event_in_jB_BuscarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -147,6 +194,24 @@ public class in_consultarArrendados extends javax.swing.JFrame {
         mp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void in_jTF_RUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_jTF_RUCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_in_jTF_RUCActionPerformed
+
+    private void in_jTF_RUCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_in_jTF_RUCKeyPressed
+         // TODO add your handling code here:
+              if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+         boolean resultado=fu.ValidacionRUC(this.in_jTF_RUC.getText());
+         if(!resultado){
+             JOptionPane.showMessageDialog(null, "El RUC ingresado es incorrecto", "Error Ingreso RUC", JOptionPane.ERROR_MESSAGE);
+             
+         }else{
+             this.in_jB_Buscar.requestFocus();
+             this.in_jB_Buscar.setEnabled(true);
+         }
+     }
+    }//GEN-LAST:event_in_jTF_RUCKeyPressed
 
     /**
      * @param args the command line arguments
@@ -184,13 +249,13 @@ public class in_consultarArrendados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton in_jB_Buscar;
+    private javax.swing.JTextField in_jTF_RUC;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTtablaEquipos;
     // End of variables declaration//GEN-END:variables
 }
