@@ -5,6 +5,7 @@
  */
 package interfaces.acm_admContMusic;
 
+import codigo.Funciones;
 import interfaces.menPrinci;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -250,6 +251,11 @@ public class acm_consultar extends javax.swing.JFrame {
 
         jTB_imprimir.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jTB_imprimir.setText("Imprimir");
+        jTB_imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTB_imprimirActionPerformed(evt);
+            }
+        });
 
         acm_jL_imprimir.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         acm_jL_imprimir.setText("Imprimir por:");
@@ -341,6 +347,8 @@ public class acm_consultar extends javax.swing.JFrame {
             jComboBox1.setEnabled(true);
             jTextField1.setEnabled(false);
             jTF_nombre.setEnabled(false);
+            jTextField1.setText("");
+            jTF_nombre.setText("");
             
         } 
     }//GEN-LAST:event_jRadioButton1MouseClicked
@@ -351,7 +359,7 @@ public class acm_consultar extends javax.swing.JFrame {
             jComboBox1.setEnabled(false);
             jTextField1.setEnabled(true);
             jTF_nombre.setEnabled(false);
-            
+            jTF_nombre.setText("");
         } 
     }//GEN-LAST:event_jRadioButton2MouseClicked
 
@@ -361,6 +369,7 @@ public class acm_consultar extends javax.swing.JFrame {
             jComboBox1.setEnabled(false);
             jTextField1.setEnabled(false);
             jTF_nombre.setEnabled(true);
+            jTextField1.setText("");
         }
     }//GEN-LAST:event_jRB_nombreMouseClicked
 
@@ -370,7 +379,7 @@ public class acm_consultar extends javax.swing.JFrame {
         
         if (jRadioButton1.isSelected()) {//Género
             try {
-                campo = "select * from Cancion where nombre_cancion= '"+jComboBox1.getSelectedItem().toString() +"'";
+                campo = "select * from Cancion where género= '"+jComboBox1.getSelectedItem().toString() +"'";
                 cargarTabla(campo);
             } catch (SQLException ex) {
                 Logger.getLogger(acm_consultar.class.getName()).log(Level.SEVERE, null, ex);
@@ -399,6 +408,25 @@ public class acm_consultar extends javax.swing.JFrame {
     private void jPanel1AncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel1AncestorRemoved
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1AncestorRemoved
+
+    private void jTB_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTB_imprimirActionPerformed
+        // TODO add your handling code here:
+         Funciones f = new Funciones();
+
+        if (jRadioButton1.isSelected()) {
+           
+                f.imprimirTabla(jTable1,"Lista de canciones de un género","THEBLOOP", true);
+           
+               
+            }
+        else if (jRadioButton2.isSelected()) {
+            f.imprimirTabla(jTable1, "Lista de canciones de un artista", "THEBLOOP", true);
+        }
+        
+        menPrinci mp = new menPrinci();
+        mp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jTB_imprimirActionPerformed
 
     /**
      * @param args the command line arguments

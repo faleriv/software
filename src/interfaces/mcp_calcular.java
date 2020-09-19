@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import codigo.Funciones;
 import conexion.Conexion;
 import conexion.Procedimientos;
 import java.sql.CallableStatement;
@@ -69,7 +70,6 @@ public class mcp_calcular extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
@@ -140,8 +140,6 @@ public class mcp_calcular extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Realizar otro cálculo");
-
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,10 +206,7 @@ public class mcp_calcular extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2))
+                            .addComponent(jButton2)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -237,9 +232,7 @@ public class mcp_calcular extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                .addComponent(jButton2)
                 .addGap(31, 31, 31))
         );
 
@@ -269,22 +262,32 @@ this.cod_rb_mcp.setSelected(false);        // TODO add your handling code here:
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         Procedimientos pr = new Procedimientos();
+        Funciones f = new Funciones();
         if(cod_rb_mcp.isSelected())
         {
+            
             if (!jTextField1.getText().isEmpty())
             {
-               
-                try {
-                    mostrarTabla("ConsultaContrato", 3,jTextField1.getText() );
-                    int codigo=Integer.parseInt(jTable1.getModel().getValueAt(0,2).toString());
-                    int valor = (int)pr.consultarPorCod(codigo,"ConsultarCuantosContratos");
-                    float costo = pr.consultarPorCod(codigo,"ConsultarCostoCod");
-                    jTextField2.setText(valor * costo+"");
-                } catch (SQLException ex) {
-                    Logger.getLogger(mcp_calcular.class.getName()).log(Level.SEVERE, null, ex);
+                if(f.validarNumero(jTextField1.getText()))
+                {    
+                       
+                        try {
+                            mostrarTabla("ConsultaContrato", 3,jTextField1.getText() );
+                            if(jTable1.getRowCount() !=0)
+                            {
+                                int codigo=Integer.parseInt(jTable1.getModel().getValueAt(0,2).toString());
+                                int valor = (int)pr.consultarPorCod(codigo,"ConsultarCuantosContratos");
+                                float costo = pr.consultarPorCod(codigo,"ConsultarCostoCod");
+                                jTextField2.setText(valor * costo+"");
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(mcp_calcular.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    
+                
                 }
-                
-                
+                else
+                    JOptionPane.showMessageDialog(null,"Error, ingreso incorrecto de datos");
             }
             else
                 JOptionPane.showMessageDialog(null, "Error, escriba el código");
@@ -293,7 +296,25 @@ this.cod_rb_mcp.setSelected(false);        // TODO add your handling code here:
         {
             if (!jTextField1.getText().isEmpty())
             {
-            
+                if(f.ValidacionRUC(jTextField1.getText()))
+                {
+                    
+                     try {
+                        mostrarTabla("ConsultaContratoRuc", 3,jTextField1.getText() );
+                        if(jTable1.getRowCount()!=0)
+                        {
+                            int codigo=Integer.parseInt(jTable1.getModel().getValueAt(0,2).toString());
+                            JOptionPane.showMessageDialog(null, codigo);
+                            int valor = (int)pr.consultarPorCod(codigo,"ConsultarCuantosContratos");
+                            float costo = pr.consultarPorCod(codigo,"ConsultarCostoCod");
+                            jTextField2.setText(valor * costo+"");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(mcp_calcular.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else
+                    JOptionPane.showMessageDialog(null,"Error, ingresó un ruc incorrecto");
             }
             else
                 JOptionPane.showMessageDialog(null, "Error, escriba el RUC");
@@ -341,7 +362,6 @@ this.cod_rb_mcp.setSelected(false);        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton cod_rb_mcp;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
