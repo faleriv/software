@@ -1,6 +1,10 @@
 package interfaces;
 
+import codigo.Funciones;
+
 import conexion.Procedimientos;
+import static interfaces.in_consultarArrendados.rs;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +24,8 @@ public class in_registrar extends javax.swing.JFrame {
     public String nombre;
     public String estado;
     
+    Funciones fu = new Funciones();
+    
     public in_registrar(int valor_inicial) {
 
         initComponents();
@@ -30,10 +36,16 @@ public class in_registrar extends javax.swing.JFrame {
         nombre ="";
         estado="";
         
-//this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
-        
+//this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero   
     }
-        
+     public boolean existeRegistro(String sentencia) throws SQLException{
+           rs = conexion.Conexion.consulta(sentencia);
+           if(rs.next()){
+               return true;
+           }else{
+            return false;   
+           }
+     }
    
 
     /**
@@ -56,8 +68,8 @@ public class in_registrar extends javax.swing.JFrame {
                 this.jToggleButton_inReg_reg.setVisible(true);
                 in_jTF_estadoActu.setVisible(false);
                 jL_estadoActual.setVisible(false);
-                jCB_estado.addItem("dañado");
-                jCB_estado.addItem("disponible");
+                jCB_estado.addItem("Dañado");
+                jCB_estado.addItem("Disponible");
             break;
             case 2:
                 this.setTitle("SIGIB | Actualización equipo"); //Poner el títu
@@ -80,29 +92,27 @@ public class in_registrar extends javax.swing.JFrame {
     public void iniciarComboBox()
     {
         String texto = in_jTF_estadoActu.getText();
-        if(texto.equalsIgnoreCase("arrendado"))
+        if(texto.equalsIgnoreCase("Arrendado"))
         {
-            jCB_estado.addItem("disponible");
+            jCB_estado.addItem("Disponible");
         }
-        else if (texto.equalsIgnoreCase("dañado"))
+        else if (texto.equalsIgnoreCase("Dañado"))
         {
-            jCB_estado.addItem("mantenimiento");
+            jCB_estado.addItem("Mantenimiento");
         }
-        else if(texto.equalsIgnoreCase("disponible"))
+        else if(texto.equalsIgnoreCase("Disponible"))
         {
-            jCB_estado.addItem("vendido");
-            jCB_estado.addItem("arrendado");
+            jCB_estado.addItem("Vendido");
+            jCB_estado.addItem("Arrendado");
         }
-        else if (texto.equalsIgnoreCase("mantenimiento"))
+        else if (texto.equalsIgnoreCase("Mantenimiento"))
         {
-            jCB_estado.addItem("disponible");
+            jCB_estado.addItem("Disponible");
         }
-        else if(texto.equalsIgnoreCase("vendido"))
+        else if(texto.equalsIgnoreCase("Vendido"))
         {
             jCB_estado.addItem("");
         }
-        
-        
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -125,9 +135,19 @@ public class in_registrar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         in_jTF_cod.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        in_jTF_cod.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                in_jTF_codFocusLost(evt);
+            }
+        });
         in_jTF_cod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 in_jTF_codActionPerformed(evt);
+            }
+        });
+        in_jTF_cod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                in_jTF_codKeyPressed(evt);
             }
         });
 
@@ -135,6 +155,11 @@ public class in_registrar extends javax.swing.JFrame {
         in_jTF_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 in_jTF_nombreActionPerformed(evt);
+            }
+        });
+        in_jTF_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                in_jTF_nombreKeyPressed(evt);
             }
         });
 
@@ -312,9 +337,12 @@ public class in_registrar extends javax.swing.JFrame {
             {
                 Procedimientos.registro(arr,"RegistroEquipo");
                 JOptionPane.showMessageDialog(null,"Equipo registrado exitosamente");
+                this.in_jTF_cod.setText("");
+                this.in_jTF_nombre.setText("");
+                
             }
-            else
-                JOptionPane.showMessageDialog(null, "El cod del equipo ya se encuentra registrado");
+            //else
+              //  JOptionPane.showMessageDialog(null, "El codigo del equipo ya se encuentra registrado");
             
         } catch (SQLException ex) {
             Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
@@ -346,7 +374,7 @@ public class in_registrar extends javax.swing.JFrame {
                 this.setVisible(false);
                 band=1; 
             }
-            else if(cambio.equalsIgnoreCase("arrendado"))
+            else if(cambio.equalsIgnoreCase("Arrendado"))
             {
             
                  //mandar la ventana cliente
@@ -362,9 +390,9 @@ public class in_registrar extends javax.swing.JFrame {
                 
             
         }
-        else if(actual.equalsIgnoreCase("arrendado"))
+        else if(actual.equalsIgnoreCase("Arrendado"))
         {
-            if (cambio.equalsIgnoreCase("disponible"))
+            if (cambio.equalsIgnoreCase("Disponible"))
             {
                 //borrar de la tabla equipo el ruc del cliente
                 Procedimientos pro = new Procedimientos();
@@ -376,9 +404,9 @@ public class in_registrar extends javax.swing.JFrame {
                 }
             }
         }
-        else if(actual.equalsIgnoreCase("dañado"))
+        else if(actual.equalsIgnoreCase("Dañado"))
         {
-            if (cambio.equalsIgnoreCase("mantenimiento"))
+            if (cambio.equalsIgnoreCase("Mantenimiento"))
             {
                 String cdg=in_jTF_cod.getText();
                 String st=jCB_estado.getSelectedItem().toString();
@@ -390,6 +418,30 @@ public class in_registrar extends javax.swing.JFrame {
                     Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        }
+        else if (actual.equalsIgnoreCase("mantenimiento"))
+        {
+            String cdg=in_jTF_cod.getText();
+                String st=jCB_estado.getSelectedItem().toString();
+                try {
+                    Procedimientos pro = new Procedimientos();
+                    pro.actualizarEquipo(cdg, st, null);
+                    JOptionPane.showMessageDialog(null,"Equipo actualizado exitosamente");
+                } catch (SQLException ex) {
+                    Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        else if (actual.equalsIgnoreCase("mantenimiento"))
+        {
+            String cdg=in_jTF_cod.getText();
+                String st=jCB_estado.getSelectedItem().toString();
+                try {
+                    Procedimientos pro = new Procedimientos();
+                    pro.actualizarEquipo(cdg, st, null);
+                    JOptionPane.showMessageDialog(null,"Equipo actualizado exitosamente");
+                } catch (SQLException ex) {
+                    Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
         else if (actual.equalsIgnoreCase("mantenimiento"))
         {
@@ -419,6 +471,47 @@ public class in_registrar extends javax.swing.JFrame {
     private void in_jTF_estadoActuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_jTF_estadoActuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_in_jTF_estadoActuActionPerformed
+
+    private void in_jTF_codFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_in_jTF_codFocusLost
+    }//GEN-LAST:event_in_jTF_codFocusLost
+
+    private void in_jTF_codKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_in_jTF_codKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            
+            try {
+                boolean resultado1,resultado2,resultado3;
+                resultado1=fu.validacionDigitosCodigoEquipo(this.in_jTF_cod.getText());
+                resultado2=fu.validacionCodigoEquipo(this.in_jTF_cod.getText());
+                resultado3=this.existeRegistro("select * from Equipo where cod_equipo = '"+in_jTF_cod.getText()+"'");
+                if(!resultado1 || !resultado2){
+                    JOptionPane.showMessageDialog(null,"Código de equipo incorrecto","Error código de equipo", JOptionPane.ERROR_MESSAGE);
+                    this.in_jTF_cod.requestFocus();
+                }else if(resultado3){
+                    JOptionPane.showMessageDialog(null,"El código del equipo ingresado ya se encuentra registrado","Error código de equipo", JOptionPane.ERROR_MESSAGE);
+                    this.in_jTF_cod.setText("");
+                }else{
+                    this.in_jTF_nombre.requestFocus();
+                }   // TODO add your handling code here:
+            } catch (SQLException ex) {
+                Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+       }
+    }//GEN-LAST:event_in_jTF_codKeyPressed
+
+    private void in_jTF_nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_in_jTF_nombreKeyPressed
+        // TODO add your handling code here:
+                if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        boolean resultado = fu.validacionNombreEquipo(this.in_jTF_nombre.getText());
+        if(!resultado){
+            JOptionPane.showMessageDialog(null,"Nombre de equipo incorrecto","Error Nombre de Equipo",JOptionPane.ERROR_MESSAGE);
+            this.in_jTF_nombre.requestFocus();
+        }else{
+            this.jCB_estado.requestFocus();
+        }
+  }
+    }//GEN-LAST:event_in_jTF_nombreKeyPressed
 
     /**
      * @param args the command line arguments
