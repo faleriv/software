@@ -62,7 +62,7 @@ public class in_registrar extends javax.swing.JFrame {
        
         switch (valor_inicial){
             case 1:
-                this.setTitle("SIGIB | Registro Equipo"); //Poner el título
+                this.setTitle("SIGIB | Registro equipo"); //Poner el título
                 this.jToggleButton_inReg_seleccionar.setVisible(false);
                 this.jToggleButton_inReg_reg.setVisible(true);
                 in_jTF_estadoActu.setVisible(false);
@@ -71,7 +71,7 @@ public class in_registrar extends javax.swing.JFrame {
                 jCB_estado.addItem("Disponible");
             break;
             case 2:
-                this.setTitle("SIGIB | Actualización Equipo"); //Poner el títu
+                this.setTitle("SIGIB | Actualización equipo"); //Poner el títu
                 this.jToggleButton_inReg_reg.setVisible(false);
                 this.jToggleButton_inReg_seleccionar.setVisible(true);
                 this.in_jTF_cod.setEnabled(false);

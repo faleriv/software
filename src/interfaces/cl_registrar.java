@@ -464,7 +464,7 @@ public class cl_registrar extends javax.swing.JFrame {
                 this.cl_jCB_estado.setEnabled(false);
                 break;
             case 2:
-                setTitle("SIGEB | Actualizar Cliente");
+                setTitle("SIGEB | Actualización Cliente");
                 this.cl_jL_registroCliente.setVisible(false);
                 this.cl_jL_actualizarCliente.setVisible(true);
                 

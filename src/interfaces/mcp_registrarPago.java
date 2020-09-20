@@ -27,7 +27,7 @@ public class mcp_registrarPago extends javax.swing.JFrame {
         mcp_jTF_numContrato.setEnabled(false);
         valor_jtf_mcp.setEnabled(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
-        setTitle("SIGEB | Registrar Pago"); //Poner el título
+        setTitle("SIGEB | Registro pago"); //Poner el título
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null); 
     }

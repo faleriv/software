@@ -28,7 +28,7 @@ public class in_consultarArrendados extends javax.swing.JFrame {
     public in_consultarArrendados() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
-        setTitle("SIGEB | Consultar equipos arrendados"); //Poner el título
+        setTitle("SIGEB | Consulta equipos arrendados"); //Poner el título
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null); //posición en el centro de la pantalla
     }

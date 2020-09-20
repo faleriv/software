@@ -322,19 +322,19 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
         //anular 3
         switch (valor) {
             case 1:
-                setTitle("SIGEB | Consultar Contrato"); //Poner el título
+                setTitle("SIGEB | Consulta contrato"); //Poner el título
                 mcp_jTB_registrarPago.setVisible(false);
                 jL_selecContrato.setVisible(false);
                 Anular.setVisible(false);
                 break;
             case 2:
-                setTitle("SIGEB | Registrar Pago"); //Poner el título
+                setTitle("SIGEB | Registro pago"); //Poner el título
                 mcp_jTB_registrarPago.setVisible(true);
                 jL_selecContrato.setVisible(false);
                 Anular.setVisible(false);
                 break;
             case 3:
-                setTitle("SIGEB | Anular Contrato");
+                setTitle("SIGEB | Anulación contrato");
                 Anular.setVisible(true);
                 mcp_jTB_registrarPago.setVisible(false);
                 jL_selecContrato.setVisible(true);
@@ -445,17 +445,22 @@ public class mcp_consultarContrato extends javax.swing.JFrame {
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
         //System.out.println(this.jRRUC.getSelectedIcon().toString());
+        Funciones f = new Funciones();
         String texto = jTF_buscar.getText();
         String consulta = "";
         if (vald) {
             if (!texto.isEmpty()) {
                 if (jRRUC.isSelected()) {
-                    consulta = "Select * from Contrato where ruc =" + texto;
-                    cargarArticulo(consulta);
-
+                    
+                    
+                        consulta = "Select * from Contrato where ruc =" + texto;
+                        cargarArticulo(consulta);
+                    
                 } else if (jRFecha.isSelected()) {
-                    consulta = "Select * from Contrato where fecha_realizacion ='"+ texto+"'";
-                    cargarArticulo(consulta);
+                    
+                        consulta = "Select * from Contrato where fecha_realizacion ='"+ texto+"'";
+                        cargarArticulo(consulta);
+                    
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error, Ingrese el ruc o la fecha");

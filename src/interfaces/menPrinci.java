@@ -62,7 +62,6 @@ public class menPrinci extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -245,11 +244,6 @@ public class menPrinci extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/SIGIB.png"))); // NOI18N
         jPanel3.add(jLabel1);
         jLabel1.setBounds(340, 130, 500, 310);
-
-        jLabel2.setFont(new java.awt.Font("Gentium Book Basic", 3, 48)); // NOI18N
-        jLabel2.setText("¡Bienvenido!");
-        jPanel3.add(jLabel2);
-        jLabel2.setBounds(480, 380, 260, 170);
 
         getContentPane().add(jPanel3);
         jPanel3.setBounds(0, 0, 1350, 720);
@@ -892,7 +886,6 @@ public class menPrinci extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;

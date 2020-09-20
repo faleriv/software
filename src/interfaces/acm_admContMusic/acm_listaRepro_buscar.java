@@ -261,14 +261,14 @@ public class acm_listaRepro_buscar extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(acm_listaRepro_buscar.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            menPrinci mp = new menPrinci();
+            mp.setVisible(true);
+            this.setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(null, "Error. Seleccione una fila porfavor");
+            JOptionPane.showMessageDialog(null, "Error. Seleccione una fila");
         }
 
-        menPrinci mp = new menPrinci();
-        mp.setVisible(true);
-        this.setVisible(false);
+        
     }//GEN-LAST:event_jTB_crearContratoActionPerformed
 
     /**

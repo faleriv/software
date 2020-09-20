@@ -31,7 +31,7 @@ public class acm_eliminarCancion extends javax.swing.JFrame {
     public acm_eliminarCancion() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);//cuando se cierra la ventana se acabe el programa
-        setTitle("SIGEB | Eliminar canción"); //Poner el título
+        setTitle("SIGEB | Eliminación canción"); //Poner el título
         //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero
         this.setLocationRelativeTo(null); //posición en el centro de la pantalla
     }
