@@ -8,7 +8,12 @@ package interfaces;
 import codigo.Funciones;
 import conexion.Procedimientos;
 import java.awt.event.KeyEvent;
+
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -199,26 +204,42 @@ public class mcp_registrarPago extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
+        Funciones f = new Funciones();
+       
+        
         if(!fecha_jtf_mcp.getText().isEmpty() )
         {
-            Procedimientos pro = new Procedimientos();
-            String arr[] = new String[2];
-            arr[0]=fecha_jtf_mcp.getText();
-            arr[1]=mcp_jTF_numContrato.getText();
-            try {
-                pro.registro(arr, "RegistroPagos");
-                JOptionPane.showMessageDialog(null, "Pago registrado de manera exitosa");
-            } catch (SQLException ex) {
-                Logger.getLogger(mcp_registrarPago.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(null, "Error, el pago no se registró.");
+            if(f.validacionFecha(fecha_jtf_mcp.getText()))
+            {    
+                String[] parts = fecha_jtf_mcp.getText().split("/");
+                int año_wr = Integer.parseInt(parts[0]); // 123
+                int mes_wr = Integer.parseInt(parts[1]); // 654321
+                int dia_wr = Integer.parseInt(parts[2]);
+                
+                if(f.fecha(año_wr, mes_wr, dia_wr))
+                {
+                    Procedimientos pro = new Procedimientos();
+                    String arr[] = new String[2];
+                    arr[0]=fecha_jtf_mcp.getText();
+                    arr[1]=mcp_jTF_numContrato.getText();
+                    try {
+                        pro.registro(arr, "RegistroPagos");
+                        JOptionPane.showMessageDialog(null, "Pago registrado de manera exitosa");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(mcp_registrarPago.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(null, "Error, el pago no se registró.");
+                    }
+                //Menu principal
+                    menPrinci mp = new menPrinci();
+                    mp.setVisible(true);
+                    this.setVisible(false);
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "Error, la fecha ingresada es incorrecta");
             }
-            //Menu principal
-            menPrinci mp = new menPrinci();
-            mp.setVisible(true);
-            this.setVisible(false);
-            
         }else
         {
             JOptionPane.showMessageDialog(null, "Error, campo fecha está vacío, corrija porfavor.");

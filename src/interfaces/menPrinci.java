@@ -351,7 +351,7 @@ public class menPrinci extends javax.swing.JFrame {
         jMenuBar2.add(jMenu6);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iiconos/icons8-money-bag-40.png"))); // NOI18N
-        jMenu4.setText("Manejo de Contratos y Pagos");
+        jMenu4.setText("Manejo de contratos y pagos");
 
         jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iiconos/manejoContratoYpago/winking-document-24.png"))); // NOI18N
         jMenuItem23.setText("Registrar contrato");

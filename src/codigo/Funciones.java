@@ -3,6 +3,8 @@ package codigo;
 import java.awt.List;
 import java.awt.print.PrinterException;
 import java.text.MessageFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.regex.Matcher;
@@ -243,6 +245,40 @@ public class Funciones {
         return resultado;
     }
 
+    public boolean fecha(int año_wr, int mes_wr, int dia_wr)
+    {
+        //Sirve para ver si el contrato se esta realizando en una fecha menor...
+        //..a la actual en la que se realiza el contrato
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String[] fecha_actual = date.format(formatter).split("-");
+        int dia_now = Integer.parseInt(fecha_actual[0]);
+        int mes_now =Integer.parseInt(fecha_actual[1]);
+        int año_now =Integer.parseInt( fecha_actual[2]);
+        boolean es_corr = false;
+        
+        if((año_wr == año_now ))
+        {
+            if((mes_wr == mes_now))
+            {
+                if(dia_wr <= dia_now)
+                    es_corr = true;
+                else
+                    es_corr = false;
+            }else if((mes_wr < mes_now))
+            {
+                es_corr=true;
+            }
+        
+        }else if((año_wr < año_now))
+            es_corr =true;
+        else
+            es_corr = false;
+        
+        return es_corr;
+            
+    }
+    
     public boolean validacionCostoMensual(String valor) {
         boolean resultado = true;
         Pattern pat = Pattern.compile("^[123456789]{1}[0123456789]{0,}[.,]{1}[0123456789]{2}");
