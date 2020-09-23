@@ -23,6 +23,7 @@ public class in_registrar extends javax.swing.JFrame {
     public String cod;
     public String nombre;
     public String estado;
+    public boolean bandera;
     
     Funciones fu = new Funciones();
     
@@ -35,6 +36,7 @@ public class in_registrar extends javax.swing.JFrame {
         cod="";
         nombre ="";
         estado="";
+        bandera = false;
         
 //this.setLocation(500,100); //posición inicial de la ventana. Pongo lo que yo quiero   
     }
@@ -323,6 +325,8 @@ public class in_registrar extends javax.swing.JFrame {
     }//GEN-LAST:event_in_jTF_nombreActionPerformed
 
     private void jToggleButton_inReg_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton_inReg_regActionPerformed
+        if(bandera)
+        {
         try {
             // TODO add your handling code here:
             String arr[] = new String[4];
@@ -341,12 +345,15 @@ public class in_registrar extends javax.swing.JFrame {
                 this.in_jTF_nombre.setText("");
                 
             }
-            //else
-              //  JOptionPane.showMessageDialog(null, "El codigo del equipo ya se encuentra registrado");
+            else
+              JOptionPane.showMessageDialog(null, "El codigo del equipo ya se encuentra registrado");
             
         } catch (SQLException ex) {
             Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Algún campo está erróneo, corrija por favor");
     }//GEN-LAST:event_jToggleButton_inReg_regActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
@@ -431,30 +438,6 @@ public class in_registrar extends javax.swing.JFrame {
                     Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
-        else if (actual.equalsIgnoreCase("mantenimiento"))
-        {
-            String cdg=in_jTF_cod.getText();
-                String st=jCB_estado.getSelectedItem().toString();
-                try {
-                    Procedimientos pro = new Procedimientos();
-                    pro.actualizarEquipo(cdg, st, null);
-                    JOptionPane.showMessageDialog(null,"Equipo actualizado exitosamente");
-                } catch (SQLException ex) {
-                    Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        else if (actual.equalsIgnoreCase("mantenimiento"))
-        {
-            String cdg=in_jTF_cod.getText();
-                String st=jCB_estado.getSelectedItem().toString();
-                try {
-                    Procedimientos pro = new Procedimientos();
-                    pro.actualizarEquipo(cdg, st, null);
-                    JOptionPane.showMessageDialog(null,"Equipo actualizado exitosamente");
-                } catch (SQLException ex) {
-                    Logger.getLogger(in_registrar.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
         if (band != 1)
         {
             menPrinci mpr= new menPrinci();
@@ -487,9 +470,11 @@ public class in_registrar extends javax.swing.JFrame {
                 if(!resultado1 || !resultado2){
                     JOptionPane.showMessageDialog(null,"Código de equipo incorrecto","Error código de equipo", JOptionPane.ERROR_MESSAGE);
                     this.in_jTF_cod.requestFocus();
+                    bandera = false;
                 }else if(resultado3){
                     JOptionPane.showMessageDialog(null,"El código del equipo ingresado ya se encuentra registrado","Error código de equipo", JOptionPane.ERROR_MESSAGE);
                     this.in_jTF_cod.setText("");
+                    bandera = false;
                 }else{
                     this.in_jTF_nombre.requestFocus();
                 }   // TODO add your handling code here:
@@ -507,8 +492,10 @@ public class in_registrar extends javax.swing.JFrame {
         if(!resultado){
             JOptionPane.showMessageDialog(null,"Nombre de equipo incorrecto","Error Nombre de Equipo",JOptionPane.ERROR_MESSAGE);
             this.in_jTF_nombre.requestFocus();
+            bandera = false;
         }else{
             this.jCB_estado.requestFocus();
+            bandera = true;
         }
   }
     }//GEN-LAST:event_in_jTF_nombreKeyPressed

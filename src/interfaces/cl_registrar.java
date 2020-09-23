@@ -407,6 +407,11 @@ public class cl_registrar extends javax.swing.JFrame {
         cl_jTB_actualizar.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         cl_jTB_actualizar.setText("Actualizar");
         cl_jTB_actualizar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cl_jTB_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cl_jTB_actualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -742,6 +747,10 @@ public class cl_registrar extends javax.swing.JFrame {
                this.bandera =true;
         }
     }//GEN-LAST:event_cl_jTF_parroquiaKeyReleased
+
+    private void cl_jTB_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cl_jTB_actualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cl_jTB_actualizarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -80,7 +80,7 @@ public class mcp_registrarPago extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jLabel6.setText("Valor: $");
+        jLabel6.setText("Valor: USD");
 
         mcp_jTF_numContrato.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
 
@@ -242,7 +242,7 @@ public class mcp_registrarPago extends javax.swing.JFrame {
             }
         }else
         {
-            JOptionPane.showMessageDialog(null, "Error, campo fecha está vacío, corrija porfavor.");
+            JOptionPane.showMessageDialog(null, "Error, campo fecha está vacío, corrija por favor.");
         }
         
         

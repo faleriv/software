@@ -161,7 +161,7 @@ public class mcp_registrarContrato extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jLabel8.setText("Costo mensual servicio ambientación ($):");
+        jLabel8.setText("Costo mensual servicio ambientación: USD");
 
         duracion_jtf.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         duracion_jtf.addFocusListener(new java.awt.event.FocusAdapter() {
